@@ -8,26 +8,25 @@
 #define sys system("pause")
 typedef long long ll;
 using namespace std;
-//求N!的因子数
-const int MAX=114514;
-int N,n;
-bool isprime[MAX];
-int prime[MAX];
-void prepare(){//欧拉筛
-    memset(isprime,true,sizeof(isprime));
-    isprime[1]=false;
-    for(int i=2;i<N;i++){
-        if(isprime[i]) prime[++n]=i;
-        for(int j=1;j<=n and i*prime[j]<N;j++){
-            isprime[i*prime[j]]=false;
-            if(i%prime[j]==0) break;
-        }
+//求解 ax≡1(mod b) 的解//TLE*2
+int a,b,x,y;
+int exgcd(int a,int b,int &x,int &y){
+    if(!b){
+        x=1;
+        y=0;
+        return a;
     }
+    int r=exgcd(b,a%b,x,y);
+    int temp=y;
+    y=x-(a/b)*y;
+    x=temp;
+    return r;
 }
 void solve(){
-    cin>>N;
-    prepare();
-    
+    cin>>a>>b;
+    int gcd=exgcd(a,b,x,y);
+    x=(x%b+b)%b;
+    cout<<x<<endl;
 }
 
 int main(){

@@ -8,26 +8,17 @@
 #define sys system("pause")
 typedef long long ll;
 using namespace std;
-//求N!的因子数
-const int MAX=114514;
-int N,n;
-bool isprime[MAX];
-int prime[MAX];
-void prepare(){//欧拉筛
-    memset(isprime,true,sizeof(isprime));
-    isprime[1]=false;
-    for(int i=2;i<N;i++){
-        if(isprime[i]) prime[++n]=i;
-        for(int j=1;j<=n and i*prime[j]<N;j++){
-            isprime[i*prime[j]]=false;
-            if(i%prime[j]==0) break;
-        }
-    }
-}
+//求1!*2!*...*n!末尾有多少个0？
+//不是非常懂
 void solve(){
-    cin>>N;
-    prepare();
-    
+    int n;
+    cin>>n;
+    int ANS=0;
+    for(int j=5;j<=n;j*=5){
+            ANS += j * (n / j) * (n / j - 1) >> 1;
+            ANS += (n / j) * (n % j + 1);
+    }
+    cout<<ANS<<endl;
 }
 
 int main(){
