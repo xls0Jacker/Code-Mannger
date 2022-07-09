@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    /*
+        选择器{
+            键值对
+        }
+    */
+    span,
+    div{
+        background-color: red;
+    }
+
+    div{
+        display: inline;
+    }
+    /* 伪元素 */
+    div.i-am-a-element::before{
+        content: "Hello, World!";
+    }
+    div.i-am-a-element::after{
+        content: "World, Hello!";
+    }
+    </style>
+</head>
+    <!--
+        1. node.js
+            npm | yan | pnmp | cnpm
+        2. 编程
+            数据结构+算法
+            Array.filter
+            lodash
+        3. box model
+            可用让所有的标签看起来一样
+        4. css 语法
+            选择器 选择标签
+            设置 属性
+        5. why span vs div
+            语义化
+        6. html css js
+            html
+                内容
+            css
+                样式
+                    布局
+                    文字
+                    图片
+            js
+                操作 html css
+    -->
+<body>
+    <span>hi</span>
+    <div>hi</div>
+    <div class="i-am-a-element">
+        ::before
+        "@"
+        ::after
+    </div>
+    <script>
+        const span=document.querySelector("span");
+        console.log(`
+            span:
+                宽度： ${span.offsetWidth}
+                高度： ${span.offsetHeight}
+        `)
+        const div=document.querySelector("span");
+        console.log(`
+            span:
+                宽度： ${div.offsetWidth}
+                高度： ${div.offsetHeight}
+        `)
+    </script>
+</body>
+</html>
