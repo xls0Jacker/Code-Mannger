@@ -8,24 +8,22 @@
 #define sys system("pause")
 typedef long long ll;
 using namespace std;
-int H_8=8*60;
-int H_24=24*60;
-double s,v;
+string Fancy(string a){
+    string s="";
+    for (int i = 1; i < a.size(); i++) {
+        if (a[i] % 2 == a[i-1] % 2) {
+        s += max(a[i], a[i-1]);
+        }
+    }
+    return s;
+}
 void solve(){
-    cin>>s>>v;
-    int Mint=H_24+H_8-ceil(s/v)-10;
-    int h,m;
-    if(Mint>=H_24) Mint-=H_24;
-    h=Mint/60;
-    m=Mint%60;
-    if(h<10){
-        if(m<10) cout<<0<<h<<":"<<0<<m<<endl;
-        else cout<<0<<h<<":"<<m<<endl;
-    }
-    else{
-        if(m<10) cout<<h<<":"<<0<<m<<endl;
-        else cout<<h<<":"<<m<<endl;
-    }
+    string a,b;
+    cin>>a>>b;
+    a=Fancy(a);
+    b=Fancy(b);
+    if(a!=b) cout<<a<<endl<<b<<endl;
+    else cout<<a<<endl;
 }
 
 int main(){

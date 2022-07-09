@@ -6,26 +6,23 @@
 #define frep freopen("in.txt","r",stdin)
 #define frepC freopen("CON","r",stdin)
 #define sys system("pause")
-typedef long long ll;
+typedef unsigned long long ll;
 using namespace std;
-int H_8=8*60;
-int H_24=24*60;
-double s,v;
+ll factorial(ll n){
+    ll f;
+    // if(n==0 or n==1)  
+    //     f=1;  
+    // else  
+    //     f=factorial(n-1)*n;  
+    // return f;  
+    return (n==0 or n==1)?f=1:f=factorial(n-1)*n; 
+}
+ll a,b;
 void solve(){
-    cin>>s>>v;
-    int Mint=H_24+H_8-ceil(s/v)-10;
-    int h,m;
-    if(Mint>=H_24) Mint-=H_24;
-    h=Mint/60;
-    m=Mint%60;
-    if(h<10){
-        if(m<10) cout<<0<<h<<":"<<0<<m<<endl;
-        else cout<<0<<h<<":"<<m<<endl;
-    }
-    else{
-        if(m<10) cout<<h<<":"<<0<<m<<endl;
-        else cout<<h<<":"<<m<<endl;
-    }
+    cin>>a>>b;
+    ll sum=a+b;
+    ll ANS=factorial(sum);
+    cout<<ANS<<endl;
 }
 
 int main(){
