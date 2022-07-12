@@ -3,6 +3,11 @@
         "*.tcc": "cpp",
         "ostream": "cpp",
         "iostream": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "bitset": "cpp",
+        "complex": "cpp",
+        "limits": "cpp",
+        "memory": "cpp",
+        "functional": "cpp"
     }
 }
