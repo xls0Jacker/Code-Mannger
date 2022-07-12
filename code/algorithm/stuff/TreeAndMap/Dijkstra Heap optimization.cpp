@@ -6,8 +6,8 @@ using namespace std;
 //Dijkstra 堆优化//单源最短路//邻接表储存//O(N*logM)
 
 /*
-   注意！
-   仅限非负权值使用
+    注意！
+    仅限非负权值使用
 */
 
 const int MAX=1e3;

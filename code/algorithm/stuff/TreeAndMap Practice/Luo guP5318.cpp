@@ -13,7 +13,7 @@ int n,m;
 
 vector<int> eg[MAX];
 void add_edge(int a,int b){
-   eg[a].push_back(b);
+    eg[a].push_back(b);
 }
 
 bool vis[MAX];

@@ -24,10 +24,11 @@ void add_edge(int a,int b){
 }
 int dis[MAX];
 bool inq[MAX];
+int pre[MAX];
 const int INF=0x3f3f3f3f;
 int n;
 void spfa(int s){
-    for(int i=1;i<=n;i++){
+    for(int i=0;i<n;i++){
         dis[i]=INF;
         inq[i]=false;
     }
@@ -43,6 +44,7 @@ void spfa(int s){
             int v=eg[i].v;
             if(dis[u]+eg[i].l<dis[v]){
                 dis[v]=dis[u]+eg[i].l;
+                pre[v]=u;
                 if(!inq[v]){
                     q.push(v);
                     inq[v]=true;
@@ -50,6 +52,15 @@ void spfa(int s){
             }
         }
     }
+}
+
+void print(int s,int f){
+    if(s==f){
+        cout<<s<<" ";
+        return;
+    }
+    print(s,pre[f]);
+    cout<<f<<" ";
 }
 
 void solve(){
@@ -64,8 +75,16 @@ void solve(){
         }
     }
     spfa(0);
-    sort(dis,dis+n);
-    cout<<-dis[0]+1<<endl;//包括本身
+    int min=0x3f3f3f3f;
+    int sign;
+    rep(0,i,n){
+        if(min>dis[i]){
+            min=dis[i];
+            sign=i;
+        }
+    }
+    cout<<-dis[sign]+1<<endl;//包括本身
+    print(0,sign);
 }
 
 int main(){
