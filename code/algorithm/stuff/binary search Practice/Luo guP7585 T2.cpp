@@ -12,16 +12,19 @@ using namespace std;
 const int MAX=1e7;
 int n,m;//孩数 弹珠种类数
 int a[MAX];
-int N;//最大嫉妒值
+ll N;//最大嫉妒值
 
 bool check(ll x){//当前最大的嫉妒值
-    int cnt=0;
+    ll cnt=0;
     Rep(1,i,m){
-        cnt+=ceil(a[i]/1.0/x);//最大可平均分配人数//不足1人向上取整
+        cnt+=a[i]/x;//最大可平均分配人数//不足1人向上取整
+        if(a[i]%x!=0){
+            cnt++;
+        }
     }
     return cnt<=n;
 }
-
+int ans;
 void solve(){
     //输入
     cin>>n>>m;
@@ -29,13 +32,17 @@ void solve(){
         cin>>a[i];
         N+=a[i];
     }
+    //二分
     ll l=0,r=N;
-    while(l+1<r){
+    while(l<=r){
         ll m=(l+r)/2;
-        if(check(m)) l=m;
-        else r=m;
+        if(check(m)) {
+            r=m-1;
+            ans=m;
+        }
+        else l=m+1;
     }
-    cout<<r<<endl;
+    cout<<ans<<endl;
 }
 
 int main(){
