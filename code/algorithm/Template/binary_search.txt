@@ -1,0 +1,28 @@
+void binary(){//找距离//处理最小值的最大值
+    int l=1,r=L+1;
+    while(l+1<r){
+        int m=(l+r)/2;
+        if(check(m)){
+            ANS=m;//成立的最小值
+            l=m;
+        }
+        else {
+            r=m;
+        }
+    }
+}
+
+
+int binary(){//二分模板//数组找成立用//返回位置
+    int l=-1,r=n;
+    while(l+1!=r){
+        int m=(l+r)/2;
+        if(check(a[m])){//此处看情况进行修改
+            l=m;
+        }
+        else {
+            r=m;
+        }
+    }
+    return r;//此处看情况进行修改
+}

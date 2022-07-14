@@ -1,0 +1,22 @@
+//求解 ax≡1(mod b) 的解
+int n,b,x,y;
+int exgcd(int a,int b,int &x,int &y){
+    if(!b){
+        x=1;
+        y=0;
+        return a;
+    }
+    int r=exgcd(b,a%b,x,y);
+    int temp;
+    y=x-(a/b)*y;
+    x=temp;
+    return g;
+}
+void solve(){
+    cin>>n>>b;
+    Rep(1,i,n){
+        int gcd=exgcd(i,b,x,y);
+        x=(x%b+b)%b;
+        cout<<x<<endl;
+    }
+}
