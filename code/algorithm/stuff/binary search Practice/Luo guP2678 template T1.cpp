@@ -25,20 +25,6 @@ bool check(int mid){//找成立的距离最小值的最大值
     }
     return cnt<=M;
 }
-int ANS;
-void binary(){//找距离
-    int l=1,r=L+1;
-    while(l+1<r){
-        int m=(l+r)/2;
-        if(check(m)){
-            ANS=m;//成立的最小值
-            l=m;
-        }
-        else {
-            r=m;
-        }
-    }
-}
 
 void solve(){
     cin>>L>>N>>M;
@@ -46,8 +32,17 @@ void solve(){
         cin>>a[i];
     }
     a[N+1]=L;//岸是最后一块石头
-    binary();
-    cout<<ANS<<endl;
+    int l=1,r=L+1;
+    while(l+1<r){
+        int m=(l+r)/2;
+        if(check(m)){
+            l=m;
+        }
+        else {
+            r=m;
+        }
+    }
+    cout<<l<<endl;//<=
 }
 
 int main(){

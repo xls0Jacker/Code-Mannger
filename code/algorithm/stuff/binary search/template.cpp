@@ -9,7 +9,9 @@
 typedef long long ll;
 using namespace std;
 //二分记得sort一遍
-
+//最小值的最大值  <= T1
+//最大值的最小值  >= T2
+//求谁二分谁
 int n;
 bool check(int m){
 
@@ -40,4 +42,3 @@ int main(){
     sys;
     return 0;
 }
-
