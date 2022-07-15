@@ -9,7 +9,7 @@
 typedef long long ll;
 using namespace std;
 //求a[N]数组中的所有素数
-const int MAX=114514;
+const int MAX=1e5+50;
 int N,n;
 bool isprime[MAX];
 int prime[MAX];
@@ -25,9 +25,17 @@ void prepare(){//欧拉筛
     }
 }
 void solve(){
-    cin>>N;
+    cin>>n;
+    N=10;
     prepare();
-    
+    int value;
+    Rep(1,i,n){
+        cin>>value;
+        if(isprime[i]){
+            cout<<value<<" ";
+        }
+    }
+    cout<<endl;
 }
 
 int main(){

@@ -8,14 +8,14 @@
 #define sys system("pause")
 typedef long long ll;
 using namespace std;
-//快速幂
+//快速幂//满足结合律的运算均可使用快速幂加速
 //求a^b mod m (b<=1e18)
 ll fast_power(int a,int b,int mod){//O(logb)
     ll ret=1;
     while(b){//b在(二进制下)不为0
         if(b&1) ret=ret*a%mod;//判断最后一位是否为1，为一乘上a的？次方
         b>>=1;//二进制下右移一位
-        a=a*a%mod;//a随位此变化提升
+        a=a*a%mod;//a随位次变化提升
     }
     return ret;
 }
