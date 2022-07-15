@@ -8,14 +8,12 @@
 #define sys system("pause")
 typedef long long ll;
 using namespace std;
-//求斐波拉契数列的an项%mod
 const int MAX=100;
-const ll mod=1e9+7;
-ll n;//数列下标
+ll mod;
 struct M{
     ll a[MAX][MAX];
 };
-//矩阵乘法
+
 M mul(M a,M b){
     M c;
     memset(c.a,0,sizeof(c.a));
@@ -29,42 +27,36 @@ M mul(M a,M b){
     }
     return c;
 }
-//矩阵乘法快速幂
+
 M fast_power(M a,ll b){
     M ret;
     memset(ret.a,0,sizeof(ret.a));
     rep(0,i,4){
-        ret.a[i][i]=1;//生成单位矩阵E
+        ret.a[i][i]=1;
     }
     while(b){
-        if(b&1) ret=mul(ret,a);//矩阵乘法注意次序
+        if(b&1) ret=mul(ret,a);
         b>>=1;
         a=mul(a,a);
     }
     return ret;
 }
-
 void solve(){
+    ll n;//位次
+    cin>>n>>mod;
     M A,B;
-    //输入
-    cin>>n;
     memset(A.a,0,sizeof(A.a));
     memset(B.a,0,sizeof(B.a));
     A.a[0][0]=A.a[0][1]=1;
-    /*
-        A | 1 1 |
-    */
-    B.a[0][1]=B.a[1][1]=B.a[1][0]=1;
-    //矩阵快速幂
-    if(n!=1) B=fast_power(B,n-2);
-    else {
+    B.a[0][1]=B.a[1][0]=B.a[1][1]=1;
+    if(n==1) {
         cout<<1<<endl;
         return;
     }
+    B=fast_power(B,n-2);
     M ANS=mul(A,B);
-    //输出
     cout<<ANS.a[0][1]<<endl;
-}  
+}
 
 int main(){
     frep;

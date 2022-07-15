@@ -8,7 +8,8 @@
 #define sys system("pause")
 typedef long long ll;
 using namespace std;
-const int MAX=114514;
+//给出一个范围1~n， q次询问， 求出第k小的素数
+const int MAX=1e5+50;
 int N,cnt;
 bool isprime[MAX];
 int prime[MAX];
@@ -24,9 +25,14 @@ void prepare(){//欧拉筛
     }
 }
 void solve(){
-    cin>>N;
+    int q;
+    cin>>N>>q;
     prepare();
-    
+    int k;
+    Rep(1,i,q){
+        cin>>k;
+        cout<<prime[k]<<endl;
+    }
 }
 
 int main(){
