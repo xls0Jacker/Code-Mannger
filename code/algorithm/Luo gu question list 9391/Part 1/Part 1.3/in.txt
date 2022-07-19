@@ -1,2 +1,9 @@
-6
-321 32 407 135 13 217
+hello world.
+<<<aaabbbbb<b
+x
+EOF
+heelo world.
+<<<<aaacbbb<b
+y<x
+EOF
+60

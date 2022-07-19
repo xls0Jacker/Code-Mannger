@@ -11,19 +11,7 @@ using namespace std;
 const int MAX=25;
 string s[MAX];
 bool cmp(string a,string b){
-    int len=min(a.size(),b.size());
-    rep(0,i,len){
-        if(a[i]>b[i]){
-            return 1;
-        }
-        else if(a[i]<b[i]){
-            return 0;
-        }
-    }
-    if(b.size()>a.size()){
-        return 1;
-    }
-    else return 0;
+    return a+b>b+a;//防止321>32//保证相邻最大
 }
 
 void solve(){
