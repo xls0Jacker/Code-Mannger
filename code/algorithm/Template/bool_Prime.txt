@@ -1,0 +1,7 @@
+bool isprime(int n){//判断是否质数
+    int s=sqrt(double(n));
+    for(int i=2;i<=s;i++){
+        if(n%i==0)return false;
+    }
+    return true;
+}
