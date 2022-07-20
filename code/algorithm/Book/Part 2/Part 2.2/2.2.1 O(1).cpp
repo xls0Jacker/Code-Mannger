@@ -8,30 +8,29 @@
 #define sys system("pause")
 typedef long long ll;
 using namespace std;
-const int MAX=1e6;
-int a[MAX];
-int n,k;
-//1<=n<=20 -10^8<=ai<=10^8 -10^8<=k<=10^8
-bool dfs(int i,int sum){//O(2^n)
-    if(i==n) return sum==k;//前n项均计算过返回sum是否与k相等
-    if(dfs(i+1,sum)) return true;//不选a[i]
-    if(dfs(i+1,sum+a[i])) return true;//选a[i]
-    return false;
-}
-void solve(){//O(2^n)做法
-    if(dfs(0,0)) puts("Yes");
-    else puts("No");
+//硬币问题
+//0<=C1,C2,C5,C10,C50,C100,C500<=1e9 0<=A<=1e9
+//优先使用面值大的硬币
+const int V[]={1,5,10,50,100,500};
+int C[6],A;
+void solve(){//O(1)做法
+    int ans=0;
+    Per(0,i,5){
+        int t=min(A/V[i],C[i]);
+        A-=t*V[i];
+        ans+=t;
+    }
+    cout<<ans<<endl;
 }
 
 int main(){
     //ios_base::sync_with_stdio(false);
     //cin.tie(NULL);
     frep;
-    cin>>n;
-    rep(0,i,n){//O(n)
-        cin>>a[i];
+    rep(0,i,6){
+        cin>>C[i];
     }
-    cin>>k;
+    cin>>A;
     solve();
     frepC;
     sys;

@@ -11,8 +11,10 @@ using namespace std;
 const int MAX=1e6;
 int a[MAX];
 int n,k;
-//1<=n<=20 -10^8<=ai<=10^8 -10^8<=k<=10^8
-bool dfs(int i,int sum){//O(2^n)
+//1<=n<=20 0<=ai<=10^8 0<=k<=10^8
+//注意条件改变 此时可考虑剪枝
+bool dfs(int i,int sum){//O(2^n) 剪枝
+    if(sum>k) return false;//剪枝
     if(i==n) return sum==k;//前n项均计算过返回sum是否与k相等
     if(dfs(i+1,sum)) return true;//不选a[i]
     if(dfs(i+1,sum+a[i])) return true;//选a[i]
