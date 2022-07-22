@@ -11,23 +11,26 @@ using namespace std;
 const int MAX_N=105,MAX_W=1e4+5;
 int n,W;
 int w[MAX_N],v[MAX_N];
-//01背包问题
-//1<=n<=100 1<=wi,vi<=100 1<=W<=10000
-//针对每个物品是否放入背包进行搜索
-//加速方法 动态规划法（DP）
-int dp[MAX_N][MAX_W];
+//完全背包问题
+//1<=n<=100 1<=W<=1e4 1<=wi,vi<=100
+/*  
+    dp[i+1][j]=max{dp[i][j],dp[i+1][j-w[i]]+v[i]};
+    通过堆DP数组的再利用可以节约内存
+    在这一递推式中，dp[i+1][j]计算只需要dp[i]和dp[i+1]，所以可用利用奇偶性质得到以下写法:
+*/
+int dp[2][MAX_W];
 void solve(){//O(nW)做法
-    per(0,i,n){
+    rep(0,i,n){
         Rep(0,j,W){
             if(j<w[i]){
-                dp[i][j]=dp[i+1][j];
+                dp[(i+1)&1][j]=dp[i&1][j];
             }
             else {
-                dp[i][j]=max(dp[i+1][j],dp[i+1][j-w[i]]+v[i]);
+                dp[(i+1)&1][j]=max(dp[i&1][j],dp[(i+1)&1][j-w[i]]+v[i]);
             }
         }
     }
-    cout<<dp[0][W]<<endl;
+    cout<<dp[n&1][W]<<endl;
 }
 
 int main(){

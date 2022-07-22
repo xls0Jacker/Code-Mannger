@@ -11,17 +11,17 @@ typedef long long ll;
 using namespace std;
 
 void solve(){
-    int a,b;
-    cin>>a>>b;
-    cout<<a+b<<endl;
+    char a='z';
+    a=a+1;
+    cout<<a<<endl;
 }
 
 int main(){
     //ios_base::sync_with_stdio(false);
     //cin.tie(NULL);
-    frep;
+    //frep;
     solve();
-    frepC;
+    //frepC;
     sys;
     return 0;
 }

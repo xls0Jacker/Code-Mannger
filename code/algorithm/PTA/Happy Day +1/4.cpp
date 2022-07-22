@@ -8,14 +8,15 @@
 #define sys system("pause")
 typedef long long ll;
 using namespace std;
-
+double n,d;
 void solve(){
-
+    cin>>n>>d;
+    printf("%.2lf\n",n*0.1*d);
 }
 
 int main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    //ios_base::sync_with_stdio(false);
+    //cin.tie(NULL);
     frep;
     solve();
     frepC;

@@ -8,15 +8,20 @@
 #define sys system("pause")
 typedef long long ll;
 using namespace std;
-
+int A,B;
 void solve(){
-
+    int M=A+B;
+    while(M--){
+        cout<<"Wang!";
+    }
+    cout<<endl;
 }
 
 int main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    //ios_base::sync_with_stdio(false);
+    //cin.tie(NULL);
     frep;
+    cin>>A>>B;
     solve();
     frepC;
     sys;

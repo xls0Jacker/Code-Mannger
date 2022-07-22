@@ -9,34 +9,39 @@
 typedef long long ll;
 using namespace std;
 const int MAX=105;
-int N;
-int team[MAX];
-void solve(){
-    int scl=1;
-    int n=N;
-    while(n--){
-        cout<<"#"<<scl<<endl;
-        int cnt=10,tmp=scl;
-        if(team)
-        while(team[scl-1]--){
-            rep(0,i,10){
-                cout<<tmp<<" ";
-                tmp+=N;
+int n,W;
+int w[MAX],v[MAX];
+//完全背包问题
+//1<=n<=100 1<=W<=1e4 1<=wi,vi<=100
+/*  
+    递推关系：
+    dp[0][j]=0;
+    dp[i+1][j]=max{dp[i][j-k*w[i]]+k*v[i])|0<=k};
+*/
+int dp[MAX][MAX];
+void solve(){//O(nW^2)做法
+    rep(0,i,n){
+        Rep(0,j,W){
+            for(int k=0;k*w[i]<=j;k++){
+                dp[i+1][j]=max(dp[i+1][j],dp[i][j-k*w[i]]+k*v[i]);
             }
-            cout<<endl;
         }
-        scl++;
     }
+    cout<<dp[n][W]<<endl;
 }
 
 int main(){
     //ios_base::sync_with_stdio(false);
     //cin.tie(NULL);
     frep;
-    cin>>N;
-    rep(0,i,N){
-        cin>>team[i];
+    cin>>n;
+    rep(0,i,n){//O(n)
+        cin>>w[i];
     }
+    rep(0,i,n){//O(n)
+        cin>>v[i];
+    }
+    cin>>W;
     solve();
     frepC;
     sys;

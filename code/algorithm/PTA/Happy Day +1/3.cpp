@@ -10,12 +10,12 @@ typedef long long ll;
 using namespace std;
 
 void solve(){
-
+    cout<<"2018"<<endl<<"wo3 men2 yao4 ying2 !"<<endl;
 }
 
 int main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+    //ios_base::sync_with_stdio(false);
+    //cin.tie(NULL);
     frep;
     solve();
     frepC;

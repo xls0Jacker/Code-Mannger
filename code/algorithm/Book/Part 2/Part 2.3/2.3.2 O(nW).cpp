@@ -11,23 +11,34 @@ using namespace std;
 const int MAX_N=105,MAX_W=1e4+5;
 int n,W;
 int w[MAX_N],v[MAX_N];
-//01背包问题
-//1<=n<=100 1<=wi,vi<=100 1<=W<=10000
-//针对每个物品是否放入背包进行搜索
-//加速方法 动态规划法（DP）
+//完全背包问题
+//1<=n<=100 1<=W<=1e4 1<=wi,vi<=100
+/*  
+    递推关系：
+    dp[0][j]=0;
+    dp[i+1][j]=max{dp[i][j-k*w[i]]+k*v[i])|0<=k};
+    可知dp[i+1][j]计算k个的情况与dp[i+1][j-w[i]]计算(k-1)个的情况相同
+    即dp[i+1][j]的递推中k>=1的部分已经在dp[i+1][j-w[i]]计算完毕
+    故有以下变形:
+    dp[i+1][j]
+    =max{dp[i][j-k*w[i]]+k*v[i])|0<=k}
+    =max{dp[i][j],max{dp[i][j-k*w[i]])|1<=k}
+    =max{dp[i][j],max{dp[i][(j-w[i])-k*w[i]]|0<=k}+v[i])
+    =max{dp[i][j],dp[i+1][j-w[i]]+v[i]};
+*/
 int dp[MAX_N][MAX_W];
 void solve(){//O(nW)做法
-    per(0,i,n){
+    rep(0,i,n){
         Rep(0,j,W){
             if(j<w[i]){
-                dp[i][j]=dp[i+1][j];
+                dp[i+1][j]=dp[i][j];
             }
             else {
-                dp[i][j]=max(dp[i+1][j],dp[i+1][j-w[i]]+v[i]);
+                dp[i+1][j]=max(dp[i][j],dp[i+1][j-w[i]]+v[i]);
             }
         }
     }
-    cout<<dp[0][W]<<endl;
+    cout<<dp[n][W]<<endl;
 }
 
 int main(){
