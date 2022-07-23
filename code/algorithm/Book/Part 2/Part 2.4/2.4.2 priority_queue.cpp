@@ -8,14 +8,16 @@
 #define sys system("pause")
 typedef long long ll;
 using namespace std;
-int a[10];
+//优先队列 （堆实现）
 void solve(){
-    int n=1;
-    n=n+n*2;
-    cout<<n; // 3
-    n=1;
-    n=n+n<<1;
-    cout<<n; // 4
+    priority_queue<int>pque;
+    pque.push(3);
+    pque.push(5);
+    pque.push(1);
+    while(!pque.empty()){
+        cout<<pque.top()<<endl;
+        pque.pop();
+    }
 }
 
 int main(){
