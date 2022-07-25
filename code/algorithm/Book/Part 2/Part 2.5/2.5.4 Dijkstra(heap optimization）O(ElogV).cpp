@@ -22,18 +22,19 @@ vector<edge> G[MAX_V];
 int d[MAX_V];
 void dijkstra(int s){//O(|E|log|V|)
     priority_queue<P,vector<P>,greater<P>> que;//按照first由小到大排
+    //first 为最短距离 second 为顶点的编号
     fill(d,d+V,INF);
     d[s]=0;
     que.push(P(0,s));
     while(!que.empty()){
         P p=que.top();que.pop();
         int v=p.second;
-        if(d[v]<p.first) continue;//?
+        if(d[v]<p.first) continue;//该顶点已找到最短距离
         rep(0,i,G[v].size()){
             edge e=G[v][i];
             if(d[e.to]>d[e.from]+e.cost){
                 d[e.to]=d[e.from]+e.cost;
-                que.push(P(d[e.to],e.to));
+                que.push(P(d[e.to],e.to));//压入短点
             }
         }
     }

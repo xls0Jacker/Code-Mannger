@@ -9,12 +9,12 @@
 typedef long long ll;
 using namespace std;
 const int MAX_N=1e6;
-int par[MAX_N],ranks[MAX_N];//数组par表示的是父亲的编号 par[x]=x时，x是所在树的根
+int par[MAX_N],_rank[MAX_N];//数组par表示的是父亲的编号 par[x]=x时，x是所在树的根
 //并查集的实现
 void Init(int n){//初始化
     rep(0,i,n){
         par[i]=i;
-        ranks[i]=0;
+        _rank[i]=0;
     }
 }
 
@@ -34,13 +34,14 @@ void unite(int x,int y){//合并x和y所属的集合
         return;
     }
     //rank不同
-    if(ranks[x]<ranks[y]){//rank小的向rank大的连边
+    if(_rank[x]<_rank[y]){//rank小的向rank大的连边
         par[x]=y;
     }
     else {
         par[y]=x;
+        if(_rank[x]==_rank[y]) _rank[x]++;//x的高度增加
     }
-    if(ranks[x]==ranks[y]) ranks[x]++;//x的高度增加
+    
 }
 
 bool same(int x,int y){//判断x和y是否属于同一集合

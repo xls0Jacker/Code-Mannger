@@ -15,7 +15,7 @@ int kk[MAX*MAX];
 //检查是否有kc+kd=m-ka-kb//预先枚举出n^2个数字并排好序//也可以去重排n*(n+1)/2个数字
 //加速方法 二分
 bool binary(int x){//O(logn)
-    int l=1,r=n+1;
+    int l=0,r=n*n;
     while(l+1<r){
         int i=(l+r)/2;
         if(kk[i]==x) return true;
@@ -26,18 +26,18 @@ bool binary(int x){//O(logn)
 }
 void solve(){//O(n^2logn)做法
     cin>>n>>m;
-    Rep(1,i,n){
+    rep(0,i,n){
         cin>>k[i];
     }
     bool f=false;
-    Rep(1,c,n){//O(n^2)
-        Rep(1,d,n){
+    rep(0,c,n){//O(n^2)
+        rep(0,d,n){
             kk[c*n+d]=k[c]+k[d];//c的每一个数有n种组合
         }
     }
-    sort(kk+1,kk+n*n+1);//O(n^2logn)
-    Rep(1,a,n){//O(n^2logn)
-        Rep(1,b,n){
+    sort(kk,kk+n*n);//O(n^2logn)
+    rep(0,a,n){//O(n^2logn)
+        rep(0,b,n){
             if(binary(m-k[a]-k[b])){
                 f=true;
             }
