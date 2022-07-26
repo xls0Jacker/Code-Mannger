@@ -11,7 +11,7 @@ using namespace std;
 //双六
 //1<=a,b<=1e9
 //拓展欧几里得算法
-//返回值为gcd(a,b) x,y为满足ax+by=gac(a,b)的解
+//返回值为gcd(a,b) x,y为满足ax+by=gcd(a,b)的解
 int extgcd(int a,int b,int &x,int &y){
     int d=a;
     if(b!=0){
@@ -30,11 +30,11 @@ void solve(){
     if(gcd!=1){
         cout<<-1<<endl;
         return;
-    }
-    if(x > 0){
+    }//只有两种可能
+    if(x > 0){//ax+(-b)y=1
         printf("%d 0 0 %d\n", x, -y);
     }
-    else {
+    else {//(-a)x+by=1
         printf("0 %d %d 0\n", y, -x);
     }
 }

@@ -35,14 +35,12 @@ int main(){
     //ios_base::sync_with_stdio(false);
     //cin.tie(NULL);
     frep;
-    cin>>N;
-    rep(0,i,N){//O(N)
-        cin>>s[i];
+    while(cin>>N){
+        rep(0,i,N){//O(N)
+        cin>>s[i]>>t[i];
+        }
+        solve();
     }
-    rep(0,i,N){//O(N)
-        cin>>t[i];
-    }
-    solve();
     frepC;
     sys;
     return 0;

@@ -8,15 +8,15 @@
 #define sys system("pause")
 typedef long long ll;
 using namespace std;
-const int MAX=1e4+10;
-int k[MAX];int n,m;
-int kk[MAX*MAX];
+const int MAX_N=1e4+5;
+int n,m,k[MAX_N];
+int kk[MAX_N*MAX_N];
 //1<=n<=1e4 1<=m<=1e8 1<=ki<=1e8
 //检查是否有kc+kd=m-ka-kb//预先枚举出n^2个数字并排好序//也可以去重排n*(n+1)/2个数字
 //加速方法 二分
 bool binary(int x){//O(logn)
     int l=0,r=n*n;
-    while(l+1<r){
+    while(r-l>=1){
         int i=(l+r)/2;
         if(kk[i]==x) return true;
         else if(kk[i]<x) l=i+1;
@@ -25,17 +25,13 @@ bool binary(int x){//O(logn)
     return false;
 }
 void solve(){//O(n^2logn)做法
-    cin>>n>>m;
-    rep(0,i,n){
-        cin>>k[i];
-    }
-    bool f=false;
     rep(0,c,n){//O(n^2)
         rep(0,d,n){
             kk[c*n+d]=k[c]+k[d];//c的每一个数有n种组合
         }
     }
     sort(kk,kk+n*n);//O(n^2logn)
+    bool f=false;
     rep(0,a,n){//O(n^2logn)
         rep(0,b,n){
             if(binary(m-k[a]-k[b])){
@@ -51,6 +47,10 @@ int main(){
     //ios_base::sync_with_stdio(false);
     //cin.tie(NULL);
     frep;
+    cin>>n>>m;
+    rep(0,i,n){
+        cin>>k[i];
+    }
     solve();
     frepC;
     sys;
