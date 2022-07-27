@@ -58,7 +58,6 @@ int main(){
     rep(0,i,n){//O(n)
         cin>>m[i];
     }
-    cin>>K;
     solve();
     frepC;
     sys;

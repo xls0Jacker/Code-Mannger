@@ -18,6 +18,7 @@ int N;
 //如果S'较小，就从S'的开头取出一个文字，追加到T的末尾
 void solve(){
     int a=0,b=N-1;
+    int cnt=0;
     while(a<=b){
         bool left=false;
         for(int i=0;a+i<=b;i++){

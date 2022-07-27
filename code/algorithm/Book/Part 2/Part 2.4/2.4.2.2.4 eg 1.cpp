@@ -44,13 +44,11 @@ int main(){
     //ios_base::sync_with_stdio(false);
     //cin.tie(NULL);
     frep;
-    cin>>N>>L>>P;
+    cin>>N;
     rep(0,i,N){//O(n)
-        cin>>A[i];
+        cin>>A[i]>>B[i];
     }
-    rep(0,i,N){//O(n)
-        cin>>B[i];
-    }
+    cin>>L>>P;
     solve();
     frepC;
     sys;

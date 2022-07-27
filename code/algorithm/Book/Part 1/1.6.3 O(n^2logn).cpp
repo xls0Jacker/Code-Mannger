@@ -14,7 +14,7 @@ int kk[MAX_N*MAX_N];
 //1<=n<=1e4 1<=m<=1e8 1<=ki<=1e8
 //检查是否有kc+kd=m-ka-kb//预先枚举出n^2个数字并排好序//也可以去重排n*(n+1)/2个数字
 //加速方法 二分
-bool binary(int x){//O(logn)
+bool binary(int x){//O(2logn)
     int l=0,r=n*n;
     while(r-l>=1){
         int i=(l+r)/2;

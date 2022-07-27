@@ -17,7 +17,7 @@ int n,m,M;
 //递推关系如下：
 //dp[i][j]=dp[i][j-i]+dp[i-1][j];
 int dp[MAX_N][MAX_M];
-void solve(){
+void solve(){//O(nm)
     dp[0][0]=1;
     Rep(1,i,m){
         Rep(0,j,n){

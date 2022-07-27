@@ -23,7 +23,7 @@ void solve(){//O(N^2)做法
         if(L[mii1]>L[mii2]) swap(mii1,mii2);//找短板和次短板位置//O(1)
         rep(2,i,N){//O(N-2)
             if(L[i]<L[mii1]) {
-                mii1=mii2;
+                mii2=mii1;
                 mii1=i;
             }
             else if(L[i]<L[mii2]){

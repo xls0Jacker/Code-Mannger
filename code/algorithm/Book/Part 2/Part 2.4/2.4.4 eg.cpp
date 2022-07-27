@@ -10,7 +10,7 @@ typedef long long ll;
 using namespace std;
 const int MAX_N=5*1e4,MAX_K=1e6;
 //以下为并查集的实现:
-int par[MAX_N],ranks[MAX_N];//数组par表示的是父亲的编号 par[x]=x时，x是所在树的根
+int par[3*MAX_N],ranks[3*MAX_N];//数组par表示的是父亲的编号 par[x]=x时，x是所在树的根
 //并查集的实现
 void Init(int n){//初始化
     rep(0,i,n){
@@ -40,14 +40,14 @@ void unite(int x,int y){//合并x和y所属的集合
     }
     else {
         par[y]=x;
+        if(ranks[x]==ranks[y]) ranks[x]++;//x的高度增加
     }
-    if(ranks[x]==ranks[y]) ranks[x]++;//x的高度增加
 }
 
 bool same(int x,int y){//判断x和y是否属于同一集合
     return find(x)==find(y);
 }
-int T[MAX_N],X[MAX_K],Y[MAX_K];//T表示信息的类型 第一种->1 第二种->2
+int T[MAX_K],X[MAX_K],Y[MAX_K];//T表示信息的类型 第一种->1 第二种->2
 int N,K;//动物数 信息数
 //食物链
 //1<=N<=50000 0<=K<=1e5
@@ -69,36 +69,38 @@ void solve(){
         if(t==1){//situation 1
             if(same(x,y+N) or same(x,y+2*N)){
                 ans++;
-                continue;
             }
-            unite(x,y);
-            unite(x,y+N);
-            unite(x,y+2*N);
+            else {
+                unite(x,y);
+                unite(x+N,y+N);
+                unite(x+2*N,y+2*N);
+            } 
         }
         else {//situation 2
             if(same(x,y) or same(x,y+2*N)){
                 ans++;
-                continue;
             }
-            unite(x,y+N);
-            unite(x+N,y+2*N);
-            unite(x+2*N,y);
+            else {
+                unite(x,y+N);
+                unite(x+N,y+2*N);
+                unite(x+2*N,y);
+            } 
         }   
     }
     cout<<ans<<endl;
 }
 
 int main(){
-    //ios_base::sync_with_stdio(false);
-    //cin.tie(NULL);
-    frep;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    //frep;
     cin>>N>>K;
     rep(0,i,K){//O(n)
         cin>>T[i]>>X[i]>>Y[i];
     }
     solve();
-    frepC;
-    sys;
+    //frepC;
+    //sys;
     return 0;
 }
 
