@@ -8,43 +8,43 @@
 #define sys system("pause")
 typedef long long ll;
 using namespace std;
-const int MAX_W=21,MAX_H=21;
-//Red and Black
-//1<=W,H<=20
-char M[MAX_W][MAX_H];
-int W,H;
-int ans;
-bool vis[MAX_W][MAX_H];
-void dfs(int i,int j){
-    if((i<0 or i>=H or j<0 or j>=W) or vis[i][j] or M[i][j]=='#') return;
-    ans++;//包括初始单元格
-    vis[i][j]=true;
-    dfs(i-1,j);
-    dfs(i+1,j);
-    dfs(i,j-1);
-    dfs(i,j+1);
-}
+const int MAX_H=100,MAX_W=100;
+//果园
+//1<=H,W<=100
 
+//思路：
+//对每一块地进行遍历，若其与自身符号相同，
+//则将其变为'.'，
+//其后每一次不为'.'的地答案数+1
+int H,W;
+char M[MAX_H+1][MAX_W+1];
+int ans;
+void dfs(int x,int y,char c){
+    if(x<0 or x>=H or y<0 or y>=H or M[x][y]!=c) return;
+    M[x][y]='.';
+    dfs(x-1,y,c);
+    dfs(x+1,y,c);
+    dfs(x,y+1,c);
+    dfs(x,y-1,c);
+}
 void solve(){
-    ans=0;
-    rep(0,i,H){
+    rep(0,i,H){//O(H*W)
         rep(0,j,W){
-            if(M[i][j]=='@'){
-                dfs(i,j);
+            if(M[i][j]!='.'){
+                ans++;
+                dfs(i,j,M[i][j]);
             }
         }
     }
-    cout<<ans<<endl;
 }
 
 int main(){
     //ios_base::sync_with_stdio(false);
     //cin.tie(NULL);
     frep;
-    while(cin>>W>>H and W!=0 and H!=0){
-        memset(M,0,sizeof(M));
-        memset(vis,0,sizeof(vis));
-        rep(0,i,H){
+    while(cin>>H>>W and H!=0 and W!=0){
+        memset(M,0,sizeof(M));//O(H*W)
+        rep(0,i,H){//O(H*W)
             rep(0,j,W){
                 cin>>M[i][j];
             }
