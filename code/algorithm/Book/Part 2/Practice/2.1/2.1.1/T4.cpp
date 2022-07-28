@@ -9,90 +9,75 @@
 typedef long long ll;
 using namespace std;
 const int MAX_H=10,MAX_W=20;
+const int INF=114514;
 //Curling 2.0
 //2<=w<=20 1<=h<=10
 //0-->空地
 //1-->障碍物
 //2-->起点
 //3-->终点
-int w,h;
-int M[MAX_H+1][MAX_W+1];
-int Sx,Sy,Gx,Gy;
-bool dfs(int x,int y,int cnt){//第x行 第y列 第cnt次人工操作
-    bool f1=false;//障碍物查询
-    bool f2=false;//终点查询
-    rep(x,i,w){//查询列
-        if(M[x][i]==1){
-            f1=true;
-        }
-        else if(M[x][i]==2){
-            f2=true;
-        }
+
+//思路：
+//当次数超过10次时仍无法到达终点
+//若能够到达终点，刷新最小值
+//每次找到我的当前非0和2的位置
+//为1需要考虑退位，为3不需要
+int H,W;
+int M[MAX_H][MAX_W];
+int Sx,Sy;
+int ans;
+int xx[]={-1,1,0,0};
+int yy[]={0,0,-1,1};
+void dfs(int x,int y,int cnt){
+    if(cnt==10 and M[x][y]!=3) return;
+    else if(M[x][y]==3){
+        ans=min(ans,cnt);
+        return;
     }
-    if(!f){//列没有，查询行
-        rep(y,i,h){
-            if(M[i][y]==1){
-                f1=true;
-            }
-            else if(M[i][y]==2){
-                f2=true;
-            }
+    rep(0,i,4){
+        int dx=x+xx[i],dy=y+yy[i];
+        if(dx>=0 and dx<H and dy>=0 and dy<W){
+            if(M[dx][dy]==1) continue;
         }
-    }
-    if(cnt==10 and !f1) return false;//次数超限 或 所在行和列没有障碍物
-    if(f2) return true;
-    //查询左端
-    rep(0,i,x){
-        if(M[x][i]==1){
-            M[x][i]=0;
-            dfs(x,i+1,cnt+1);
+        while(dx>=0 and dx<H and dy>=0 and dy<W and M[dx][dy]!=3 and M[dx][dy]!=1){//找1或着3
+            dx+=xx[i],dy+=yy[i];
         }
-    }
-    //查询右端
-    rep(x,i,w){
-        if(M[x][i]==1){
-            M[x][i]=0;
-            dfs(x,i-1,cnt+1);
+        if(dx<0 or dx>=H or dy<0 or dy>=W) continue;//没找到1或者3
+        int sign=M[dx][dy];
+        int tx=dx,ty=dy;
+        if(M[dx][dy]==1){//若找到1 还原位置
+            M[dx][dy]=0;//摧毁障碍物
+            dx-=xx[i],dy-=yy[i];
         }
-    }
-    //查询上端
-    rep(0,i,y){
-        if(M[i][y]==1){
-            M[i][y]=0;
-            dfs(i+1,y,cnt+1);
-        }
-    }
-    //查询下端
-    rep(y,i,h){
-        if(M[i][y]==1){
-            M[i][y]=0;
-            dfs(i-1,y,cnt+1);
-        }
+        dfs(dx,dy,cnt+1);
+        M[tx][ty]=sign;//还原标记
     }
 }
-
 void solve(){
-    if(dfs(0,0,0)) puts("YES");
-    else puts("NO");
+    dfs(Sx,Sy,0);
+    if(ans==INF){
+        cout<<-1<<endl;
+    }
+    else {
+        cout<<ans<<endl;
+    }
 }
 
 int main(){
     //ios_base::sync_with_stdio(false);
     //cin.tie(NULL);
     frep;
-    while(cin>>w>>h and w!=0 and h!=0){
+    while(cin>>W>>H and W!=0 and H!=0){
         memset(M,0,sizeof(M));
-        rep(0,i,h){
-            rep(0,j,w){
+        rep(0,i,H){
+            rep(0,j,W){
                 cin>>M[i][j];
                 if(M[i][j]==2){
                     Sx=i,Sy=j;
                 }
-                else if(M[i][j]==3){
-                    Gx=i,Gy=j;
-                }
             }
         }
+        ans=INF;
         solve();
     }
     frepC;
