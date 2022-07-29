@@ -17,8 +17,8 @@ const int MAX_H=1000,MAX_W=1000;
 //要保证可以吃到奶酪，
 //奶酪工厂的数值必定从1逐一升到N，
 //只要从1开始逐位找，每次求出最短路即可
-//找得到返回数值改变
-//找不到数值不变
+//找得到增量不为零
+//找不到增量为0（题目保证一定有路，可以不考虑）
 int H,W,N;
 char M[MAX_H+1][MAX_W+1];
 bool vis[MAX_H+1][MAX_W+1];
@@ -26,57 +26,52 @@ int Sx,Sy;
 int xx[]={-1,1,0,0};
 int yy[]={0,0,1,-1};
 
-struct st{
+struct st{//坐标
     int x,y;
     int dis;
 };
-int bfs(int Fx,int Fy){
+int bfs(int Fx,int Fy){//终点坐标
     queue<st>q;
-    st temp;
-    temp.x=Sx;
-    temp.y=Sy;
-    temp.dis=0;
-    q.push(temp);
-    vis[Sx][Sy]=1;
+    q.push({Sx,Sy,0});
+    vis[Sx][Sy]=1;//标记起点
     while(!q.empty()){
         st res=q.front();q.pop();
-        if(res.x==Fx and res.y==Fy) return res.dis;
+        if(res.x==Fx and res.y==Fy) return res.dis;//找到终点
         rep(0,i,4){
             int dx=res.x+xx[i];
             int dy=res.y+yy[i];
             int dist=res.dis+1;
-            if(!vis[dx][dy] and M[dx][dy]=='.'){
-                st tmp;
-                tmp.x=dx,tmp.y=dy;
-                tmp.dis=dist;
-                q.push(temp);
-                vis[dx][dy]=1;
-            }
+            //（奶酪工厂不吃也可以走）
+            if(vis[dx][dy] or (dx<0 or dx>=H or dy<0 or dy>=W) or M[dx][dy]=='X') continue;
+            q.push({dx,dy,dist});
+            vis[dx][dy]=1;
         }
     }
-    return 0;//没路
+    return 0;//没路（题目保证一定有路，可以不考虑）
 }
-void solve(){
-    string n=to_string(N);
-    char sign='1';
-    int sum=0;
+char n;
+char sign='1';
+int sum=0;
+void Find(){
     rep(0,i,H){
         rep(0,j,W){
-            if(M[i][j]==sign and sign!=n[0]){
-                memset(vis,0,sizeof(vis));
+            if(M[i][j]==sign and sign!=n){
                 int cnt=bfs(i,j);//路程增量
-                sign=sign+1;
-                if(cnt==0){
-                    cout<<-1<<endl;
-                }
-                else {
-                    sum+=cnt;
-                }
+                Sx=i,Sy=j;//更新起点
+                sign=sign+1;//（冷知识：'9'+1=':'）
+                sum+=cnt;
+                return;
             }
         }
     }
+}
+void solve(){
+    n=N+'0'+1;//化为字符
+    while(sign!=n){
+        memset(vis,0,sizeof(vis));
+        Find();
+    }
     cout<<sum<<endl;
-    cout<<"建议地图数字化 方便后续操作"<<endl;
 }
 
 int main(){
