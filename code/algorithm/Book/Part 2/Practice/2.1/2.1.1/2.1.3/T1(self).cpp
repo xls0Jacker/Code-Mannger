@@ -22,6 +22,7 @@ int T;//样例数
 string s;//数的排列
 bool f;//判断奇偶数
 int prev(){//预处理
+    f=0;
     s.erase(remove(s.begin(),s.end(),' '),s.end());
     if(s.size()%2==1) f=1;//长度为奇数
     return s.size()/2;
@@ -32,13 +33,8 @@ void solve(){
     sort(s.begin(),s.end());
     do{
         string str=s;
-        if(str[0]=='0') continue;//排除前一集合0开头的情况
-        if(!f) {//排除后一集合0开头的情况
-            if(str[half-1]=='0') continue;
-        }
-        else {
-            if(str[half]=='0') continue;
-        }
+        if(str[0]=='0' and half!=1) continue;//排除前一集合0开头的情况（两位数可以但走0）
+        if(str[half]=='0') continue;//排除后一集合0开头的情况
         int PreN,NxtN;//前一集合代表数字 后一集合代表数字
         PreN=stoi(str.substr(0,half));//前半集合转数字
         if(!f) NxtN=stoi(str.substr(half,half));//后半集合转数字（偶）

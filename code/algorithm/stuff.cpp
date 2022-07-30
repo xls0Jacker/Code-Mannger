@@ -11,9 +11,31 @@ using namespace std;
 const int INF=1e9+7;
 
 void solve(){
-    char c='9';
-    c=c+1;
-    cout<<c<<endl;
+    int a[]={1,2,3,4,5,6,7,8,9,10,11,12,13};
+    int sum=0;
+    double t11=clock();
+    do{
+        rep(0,i,9){
+            //cout<<a[i]<<" ";
+        }
+        //cout<<endl;
+        sum++;
+    }while(next_permutation(a,a+13));
+    double t12=clock();
+    cout<<"数字排列时间:"<<endl<<t12-t11<<endl;
+    cout<<t11<<" "<<t12<<endl;
+    string s="123456789ABCD";
+    double t21=clock();
+    do{
+        rep(0,i,13){
+            //cout<<s[i]<<" ";
+        }
+        //cout<<endl;
+        sum++;
+    }while(next_permutation(s.begin(),s.end()));
+    double t22=clock();
+    cout<<"字符排列时间:"<<endl<<t22-t21<<endl;
+    cout<<t21<<" "<<t22<<endl;
 }
 
 int main(){
