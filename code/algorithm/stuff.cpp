@@ -1,51 +1,123 @@
+#include<iostream>
 #include"bits/stdc++.h"
-#define rep(a,i,n) for(int i=a;i<n;i++)
-#define per(a,i,n) for(int i=n;i>a;i--)
-#define Rep(a,i,n) for(int i=a;i<=n;i++)
-#define Per(a,i,n) for(int i=n;i>=a;i--)
 #define frep freopen("in.txt","r",stdin)
 #define frepC freopen("CON","r",stdin)
 #define sys system("pause")
-typedef long long ll;
 using namespace std;
-const int INF=1e9+7;
-
-void solve(){
-    int a[]={1,2,3,4,5,6,7,8,9,10,11,12,13};
-    int sum=0;
-    double t11=clock();
-    do{
-        rep(0,i,9){
-            //cout<<a[i]<<" ";
-        }
-        //cout<<endl;
-        sum++;
-    }while(next_permutation(a,a+13));
-    double t12=clock();
-    cout<<"数字排列时间:"<<endl<<t12-t11<<endl;
-    cout<<t11<<" "<<t12<<endl;
-    string s="123456789ABCD";
-    double t21=clock();
-    do{
-        rep(0,i,13){
-            //cout<<s[i]<<" ";
-        }
-        //cout<<endl;
-        sum++;
-    }while(next_permutation(s.begin(),s.end()));
-    double t22=clock();
-    cout<<"字符排列时间:"<<endl<<t22-t21<<endl;
-    cout<<t21<<" "<<t22<<endl;
+#define max 20
+typedef struct {
+	int size;
+	int* data;
+}List;
+int ListLength(List* psl)
+{
+	return psl->size;
 }
+void InitList(List* psl)
+{
+	//assert(psl != NULL);  //断言
+    psl->data = new int[114514];
+	//psl->data = NULL;  //初始顺序表为空
+	psl->size = 0;  //初始数据个数为0
+	//psl->capacity = 0;  //初始空间容量为0
+}
+int GetElem(List L, int i, int* psl)
+{
+	if (L.size == 0 || i<0 || i>L.size)
+		return 114514;
+	else {
+		*psl = L.data[i];
+		return *psl;
+	}
+}
+void ListInsret(List &L, int i, int m)//每加引用 size++无效
+{   
+    //cout<<"Pos:"<<i<<endl;
+    //cout<<"Size:"<<L.size<<endl;
+    if (i<0 || i>L.size+1){
+        cout<<"Insert Position Error!"<<endl;
+        return ;
+    }
+		
+    for(int j=L.size-1;j>=i;j--){//包括id位置的元素后移一位
+        L.data[j+1]=L.data[j];
+    }
+    L.size++;
+    L.data[i]=m;//在id处插入该值
 
-int main(){
-    //ios_base::sync_with_stdio(false);
-    //cin.tie(NULL);
+}
+void MergeList(List La, List Lb, List& Lc)
+{
+	InitList(&Lc);
+	int i=0,j=0,k=0;
+	int La_len = ListLength(&La);
+	int Lb_len = ListLength(&Lb);
+    cout<<La_len<<" "<<Lb_len<<endl;
+	int ai,bj;
+    //意义不明
+	// cin >> ai >> bj;
+	// while ((i <= La_len) && (j <= Lb_len))  //La和Lb均非空
+	// {
+	// 	if (ai <= bj)
+	// 	{
+	// 		ListInsret(Lc, ++k, ai);
+	// 		++i;
+	// 	}
+	// 	else
+	// 	{
+	// 		ListInsret(Lc, ++k, bj);
+	// 		++j;
+	// 	}
+	// }
+	while (i < La_len) {
+		GetElem(La, i++, &ai);//改ai的值
+		ListInsret(Lc, k++, ai);
+	}
+	while (j < Lb_len) {
+		GetElem(Lb, j++, &bj);
+		ListInsret(Lc, k++, bj);
+	}
+}
+void output(List L)
+{
+	for (int i = 0; i < L.size; i++) {
+		cout << L.data[i] << " ";
+	}
+    cout<<endl;
+}
+int main()
+{
     frep;
-    solve();
+	List La;
+	InitList(&La);
+	List Lb;
+	InitList(&Lb);
+	int m,n;
+	int i = 0;
+	cout << "请输出序列所含元素个数" << endl;
+	cin >>m;
+	cout << endl;
+	while (m--)
+	{
+		cin >> n;
+		ListInsret(La, i, n);
+		i++;
+	}
+	i = 0;
+	cout << "请输出序列所含元素个数" << endl;
+	cin >> m;
+	cout  << endl;
+	while (m--)
+	{
+		cin>> n ;
+		ListInsret(Lb, i, n);
+		i++;
+	}
+		List Lc;
+	MergeList(La,Lb,Lc);
+    cout<<"拼接后："<<endl;
+	output(Lc);
     frepC;
-    sys;
+    system("pause");
     return 0;
 }
-
-
