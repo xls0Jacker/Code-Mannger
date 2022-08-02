@@ -9,13 +9,24 @@
 typedef long long ll;
 using namespace std;
 
-ll ans;
-ll a,b;
+bool cmp(pair<int,int> a,pair<int,int> b){
+    if(b.first*a.second>a.first*b.second){
+        return 0;//T2*D1>T1*D2 //1在前
+    }
+    else return 1;
+}
 void solve(){
-	a=114514,b=1919810;
-    ans+=a*b;
-    cout<<ans<<endl;
-    cout<<a*b<<endl;
+    pair<int,int> A[10];
+    rep(0,i,6){
+        cin>>A[i].first>>A[i].second;
+    }
+    vector<int>v;
+    sort(A,A+6,cmp);
+    rep(0,i,5){
+        v.push_back(2*A[i].second*A[i+1].first);
+    }
+    int sum=0;
+    sum++;
 }
 
 int main(){

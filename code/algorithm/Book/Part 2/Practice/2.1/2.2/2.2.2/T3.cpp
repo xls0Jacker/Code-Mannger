@@ -1,58 +1,60 @@
 #include"bits/stdc++.h"
-#define rep(a,i,n) for(int i=a;i<n;i++)
-#define per(a,i,n) for(int i=n;i>a;i--)
-#define Rep(a,i,n) for(int i=a;i<=n;i++)
-#define Per(a,i,n) for(int i=n;i>=a;i--)
 #define frep freopen("in.txt","r",stdin)
 #define frepC freopen("CON","r",stdin)
 #define sys system("pause")
-typedef long long ll;
+const int INF = 1e9+7;
 using namespace std;
-const int MAX_N=20;
-//发放工资 Allowance
-//1≤N≤20 1≤C≤100,000,000 1≤vi≤100,000,000 1≤bi≤1,000,000
-
-//猜想：
-//将所有面值从大往小排，
-//当面值>=C时，直接支付一天工资，
-//当面值<C时，找到最大的不浪费的面值，
-//之后找最小能成立的面值补上即可；
-
-ll N,C;
-typedef pair<ll,ll> P;//面值 数量
-P q[MAX_N+1];
-bool cmp(P a,P b){
-    return a.first>b.first;
-}
-void solve(){
-    int ans=0;
-    sort(q,q+N,cmp);
-    rep(0,i,N){
-        if(q[i].first>=C and q[i].second!=0){//找到所有比其大的值，均可支付一天的价格
-            q[i].second=0;
-            ans+=q[i].second;
-        }
-        else { //找到最大的不浪费的面值，之后找最小能成立的面值补上；
-            int sum=0;
-            rep(0,j,q[i].second){
-
-            }
-        }
-    }
-    
-}
-
-int main(){
-    //ios_base::sync_with_stdio(false);
-    //cin.tie(NULL);
+int main()
+{   int N, C, ans;
+    pair<int, int> cost[20];
     frep;
     cin>>N>>C;
-    rep(0,i,N){
-        cin>>q[i].first>>q[i].second;
+    for(int i = 0; i < N; i++)
+    {
+        scanf("%d %d", &cost[i].first, &cost[i].second);
     }
-    solve();
+    ans = 0;
+    sort(cost, cost+N);//小到大
+    for(int i = 0; i < N; i++)//处理面值>=C的纸币
+    {
+        if(cost[i].first >= C)
+        {
+            ans += cost[i].first / C * cost[i].second;
+            cost[i].second = 0;
+        }
+    }
+    while(true)//处理面值<=C的纸币
+    {
+        int val = C;
+        int sum = 0;//当前价值和
+        for(int i = N - 1; i >= 0; i--)//从大面值开始找，找到不浪费的值
+        {
+            if(val && cost[i].second)
+            {
+                int k = min(val / cost[i].first, cost[i].second);
+                if(k)
+                {
+                    val -= cost[i].first * k;
+                    cost[i].second -= k;
+                    sum += cost[i].first * k;
+                }
+            }
+        }
+        for(int i = 0; i < N; i++)//从小面值开始找 补差值val
+        {
+            if(val && cost[i].second && cost[i].first > val)
+            {
+                val = 0;
+                sum += cost[i].first;
+                cost[i].second--;
+                break;
+            }
+        }
+        if(val > 0) break;//中止条件
+        ans ++;
+    }
+    printf("%d\n", ans);
     frepC;
     sys;
     return 0;
 }
-
