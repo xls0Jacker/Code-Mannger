@@ -8,14 +8,15 @@
 #define sys system("pause")
 typedef long long ll;
 using namespace std;
+//隔间预订 Stall Reservations
+//1≤n≤50000,1≤s,t≤10000
 
-ll ans;
-ll a,b;
+//思路：
+//按照开始时间由小到大开始排，
+//（第一头牛必选）若上一头牛与当前牛重叠，放在一个新的房间里，
+//否则
 void solve(){
-	a=114514,b=1919810;
-    ans+=a*b;
-    cout<<ans<<endl;
-    cout<<a*b<<endl;
+
 }
 
 int main(){
@@ -27,4 +28,6 @@ int main(){
     sys;
     return 0;
 }
+
+
 

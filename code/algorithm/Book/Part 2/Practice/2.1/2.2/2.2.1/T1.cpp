@@ -17,15 +17,21 @@ const int MAX_N=25000;
 //每次在相交或相邻的区间内选择结束时间最长的区间，（手写cmp）
 //计算成立个数即可
 int n,T;
+int a[MAX_N+1];
 typedef pair<int,int> P;
 vector<P> st;
 bool cmp(P a,P b){
     return a.second > b.second;
 }
 
+bool cmp0(P a,P b){
+    if(a.first==b.first) return a.second>b.second;
+    else return a.first<b.first;
+}
+
 void solve(){
-    sort(st.begin(),st.end());//按开始时间从小到大排列
-    if(st[0].first>1){//开头区间特判
+    sort(st.begin(),st.end(),cmp0);//按开始时间从小到大排列
+    if(st[0].first!=1){//开头区间特判
         cout<<-1<<endl;
         return;
     }
@@ -35,7 +41,7 @@ void solve(){
     while(dist<T){
         int cnt=0;
         rep(pos,i,n){
-            if(st[i].first>dist){
+            if(st[i].first>dist+1){
                 break;
             }
             cnt++;//合法区间数目
@@ -53,18 +59,17 @@ void solve(){
 }
 
 int main(){
-    //ios_base::sync_with_stdio(false);
-    //cin.tie(NULL);
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     frep;
     cin>>n>>T;
     int x,y;
     rep(0,i,n){
         cin>>x>>y;
-        st.push_back(P(x,y));
+        st.push_back({x,y});
     }
     solve();
     frepC;
     sys;
     return 0;
 }
-
