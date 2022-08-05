@@ -21,7 +21,7 @@ const int MAX_W=30;
 int T,W;
 int vis[MAX_T+1];
 int dp[MAX_T+1][MAX_W+2];//由于数组的MAX_W与0均可能用到，所以不能多开1而是多开2
-void solve(){
+void solve(){//i+1->i 相当于多重背包（?）
     Rep(1,i,T){
         Rep(0,j,W){
             if((vis[i]==1 and j%2==0) or (vis[i]==2 and j%2==1)){//不移动有果子
