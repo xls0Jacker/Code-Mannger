@@ -20,22 +20,36 @@ const int MAX_M=1e5;
 //如dp[i+1][j]=0,dp[i][j-k*A[i]]=1(条件合法)
 //则dp[i+1][j]|=dp[i][j-k*A[i]]=>1(0|1=1)（按位或运算）
 
-//在将数组进行重复利用进一步减少空间复杂度
+//再将数组进行重复利用进一步减少空间复杂度
+
+//优化思路：
+//定义dp[i+1][j]为使用前i位数达到j的第i种数的最大剩余数目，有
+//dp[i+1][j]={
+//Ci dp[i][j]>=0 （前面的(i-1)位数字使用后仍有余数，不需要使用第i位数）
+//-1 j<A[i] or dp[i+1][j-A[i]]<=0 （第i位数超过或不足）
+//dp[i+1][j-A[i]]-1 其他 （第i位数的数目减一）
+//}
+
+//再将数组进行重复利用进一步减少空间复杂度
 int n,M;
-bool dp[2][MAX_M+2];
+int dp[MAX_M+2];
 int A[MAX_N+1],C[MAX_N+1];
-void solve(){//O(K∑iMi)
-    dp[0][0]=true;
+void solve(){//O(nK)
+    dp[0]=0;
     rep(0,i,n){
         Rep(0,j,M){
-            for(int k=0;k<=C[i] and k*A[i]<=j;k++){
-                dp[(i+1)&1][j]|=dp[i&1][j-k*A[i]];
+            if(dp[j]>=0){
+                dp[j]=C[i];
             }
+            else if(j<A[i] or dp[j-A[i]]<=0){
+                dp[j]=-1;
+            }
+            else dp[j]=dp[j-A[i]]-1;
         }
     }
     int ans=0;
     Rep(1,i,M){//排除总额为0的情况
-        if(dp[n&1][i]) ans++;
+        if(dp[i]>=0) ans++;
     }
     cout<<ans<<endl;
 }
@@ -47,7 +61,7 @@ int main(){
     while(cin>>n>>M and n!=0 and M!=0){
         memset(A,0,sizeof(A));
         memset(C,0,sizeof(C));
-        memset(dp,0,sizeof(dp));
+        memset(dp,-1,sizeof(dp));
         rep(0,i,n){
             cin>>A[i];
         }
