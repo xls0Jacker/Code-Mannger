@@ -7,8 +7,8 @@ using namespace std;
 #define frep freopen("in.txt","r",stdin)
 #define frepC freopen("CON","r",stdin)
 #define sys system("pause")
-#define LIMIT_ULL 100000000000000000//比unsigned ll 最大长度少1
-//unsigned long long 最大为 1844674407370955161
+#define LIMIT_ULL 10000000000000000//比unsigned ll 最大长度少2 1e16
+//unsigned long long 最大为 1844674407370955161 1e18
 const int MAX_N=1000;
 const int MAX_K=100;
 //凑数问题 Dollar Dayz
@@ -52,7 +52,7 @@ void solve(){
         }
     }
     if(dp[K][N][0]){//高位有数则拼接
-        cout<<dp[N][K][0];
+        cout<<dp[K][N][0];
     }
     cout<<dp[K][N][1]<<endl;
 }
