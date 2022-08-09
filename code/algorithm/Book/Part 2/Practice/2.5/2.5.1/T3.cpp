@@ -8,31 +8,14 @@
 #define sys system("pause")
 typedef long long ll;
 using namespace std;
-const int MAX_V=1e4;
-int V;
-//Floyd-Warshell
-//求解两点之间的最短路径
-//可求负权 判负圈
-int d[MAX_V][MAX_V];
-void warshall_floyd(){//O(|V|^3)
-    rep(0,k,V){
-        rep(0,i,V){
-            rep(0,j,V){
-                d[i][j]=min(d[i][j],d[i][k]+d[k][j]);
-            }
-        }
-    }
-}
+// 虫洞 Wormholes
+// 1≤F≤5 1≤N≤500 1≤M≤2500 1≤M≤200
 
-bool find_negative_loop(){//self
-    rep(0,i,V){
-        if(d[i][i]<0){
-            return true;
-        }
-    }
-    return false;
-}
-void solve(){  
+//思路:
+//使用Bellford算法判断是否有s可达的负环（增边操作很简单就不写了）
+
+
+void solve(){
 
 }
 
