@@ -43,7 +43,7 @@ bool find_negative_loop(){
     memset(d,0,sizeof(d));
     rep(0,i,V){
         rep(0,j,E){
-            edge e=es[i];
+            edge e=es[j];
             if(d[e.to]>d[e.from]+e.cost){
                 d[e.to]=d[e.from]+e.cost;
                 if(i==V-1) return true;//如果第V次仍然更新了，则存在负圈
