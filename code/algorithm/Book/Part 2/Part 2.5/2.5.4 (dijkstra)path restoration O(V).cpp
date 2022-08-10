@@ -8,7 +8,7 @@
 #define sys system("pause")
 typedef long long ll;
 using namespace std;
-const int MAX_V=1e6,MAX_E=1e6;
+const int MAX_V=1e4,MAX_E=1e4;
 const int INF=1e9+7;
 //Dijkstra 单源最短路
 //路径还原

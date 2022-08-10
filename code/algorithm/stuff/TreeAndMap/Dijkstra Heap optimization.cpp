@@ -55,7 +55,6 @@ void dijk(int s){//距离及标记初始化
                 dis[v]=dis[u]+l;
                 q.push(mii(dis[v],v));//压入短点
             }
-            
         }
     }
 }
