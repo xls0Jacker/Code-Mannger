@@ -1,95 +1,62 @@
+//#include<iostream>
 #include"bits/stdc++.h"
+#define frep freopen("in.txt","r",stdin)
+#define frepC freopen("CON","r",stdin)
+#define sys system("pause")
 using namespace std;
-#define MAX_E (2500 + 200 + 16) * 2
-// 从顶点from指向顶点to的权值为cost的边
-struct edge
+typedef struct LNode {
+	int data;
+	struct LNode* next;
+}LNode, * LinkList;
+void Init(LinkList& L)//初始化链表
 {
-	int from, to, cost;
-	edge(){}
-	edge(int from, int to, int cost)
-	{
-		this->from = from;
-		this->to = to;
-		this->cost = cost;
-	}
-};
-// 边
-edge es[MAX_E];
-// 最短距离
-int d[MAX_E];
-// V是顶点数，E是边数
-int V, E;
-// 是否存在负圈
-bool find_negative_loop()
-{
-	memset(d, 0, sizeof(d));
-	for (int i = 0; i < V; ++i)
-	{
-		for (int j = 0; j < E; ++j)
-		{
-			edge e = es[j];
-			if (d[e.to] > d[e.from] + e.cost)
-			{
-				d[e.to] = d[e.from] + e.cost;
-				// 如果更新了V次，则存在负圈
-				if (i == V - 1)
-				{
-					return true;
-				}
-			}
-		}
-	}
-	return false;
+	L = new LNode;
+	//if (L == NULL) return;
+	L->next = NULL;
 }
-int main(int argc, char *argv[])
-{
-	freopen("in.txt", "r", stdin);
-	int F;
-	cin >> F;
-	while (F--)
-	{
-		int N, M, W;
-		cin >> N >> M >> W;
-		V = N;
-		E = 0;
-		for (int i = 0; i < M; ++i)
-		{
-			int from, to, cost;
-			cin >> from >> to >> cost;
-			--from;
-			--to;
-			es[E].from = from;
-			es[E].to = to;
-			es[E].cost = cost;
-			++E;
-			// 无向图再来一次
-  			es[E].from = to;
-  			es[E].to = from;
-  			es[E].cost = cost;
-  		    ++E;
-		}
-		for (int i = 0; i < W; ++i)
-		{
-			int from, to, cost;
-			cin >> from >> to >> cost;
-			--from;
-			--to;
-			es[E].from = from;
-			es[E].to = to;
-			es[E].cost = -cost;
-			++E;
-		}
-		if (find_negative_loop())
-		{
-			cout << "YES" << endl;
-		}
-		else
-		{
-			cout << "NO" << endl;
-		}
-	}
-    freopen("CON", "r", stdin);
-    system("pause");
-	return 0;
+void panding(LinkList& L) {
+	LinkList P, Q;
+	P = L; L = L->next; Q = P;
+	free(Q);
 }
-///////////////////////////End Sub//////////////////////////////////
+void output(LinkList p)
+{
+	while (p) {
+		cout << p->data;
+		cout << " ";
+		p = p->next;
+	}
+}
+void Listlnsert_L(LinkList& L, int i, int e) {
+	LinkList p = L; int j = 0;
+	while (p && j < i - 1) {
+		p = p->next; j++; //寻找第i-1个结点，p指向i-1结点
+	}
+	if (!p || j > i - 1) {
+		cout<<"Error!"<<endl;
+		return; //i大于表长+1或者小于1，插入位置非法
+	}
+	LinkList s = new LNode; s->data = e; //生成新结点s,将结点s的数据域置为e
+	s->next = p->next;
+	p->next = s;
+}
+int main() {
+	frep;
+	LinkList L;
+	Init(L);
+	cout << "请输入链表L的长度" << endl;
+	int m, n,i;
+	cin >> m;
+	cout << "请输入链表元素" << endl;
+	for (i = 0; i < m;i++) {
+		cin >> n;
+		Listlnsert_L(L,i,n);
+	}
+	cout << endl;
+	output(L);
+	panding(L);
+	cout << endl;
+	output(L);
+	frepC;
+	system("pause");
+}

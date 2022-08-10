@@ -47,6 +47,7 @@ void unite(int x,int y){//合并x和y所属的集合
 bool same(int x,int y){//判断x和y是否属于同一集合
     return find(x)==find(y);
 }
+
 void solve(){
 
 }
