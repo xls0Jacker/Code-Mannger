@@ -8,17 +8,26 @@
 #define sys system("pause")
 typedef long long ll;
 using namespace std;
-const int MAX_E=1e4;
-//Kruskal 最小生成树
-//按照边的权值的顺序从小到大查看一遍
-//如果不产生圈(重边也算在内)，将这一条边加入到生成树中
-//(原理证明与Prim算法类似)
-//判断圈的方法：
-//现将连接顶点u和顶点v的边e加入到生成树中
-//如果加入之前u和v不在同一个连接分量中,那么加入e不会产生圈
-//反之，产生圈
-const int MAX_N=1e6;
-int par[MAX_N],_rank[MAX_N];//数组par表示的是父亲的编号 par[x]=x时，x是所在树的根
+const int MAX_N=2000,MAX_M=10000;
+// 干草吃完了 Out of Hay
+// 2≤N≤2000 1≤M≤10000
+// 1≤A,B≤N,1≤L≤1,000,000,000
+
+//猜想：
+//输出最小生成树的最长边
+
+//解决方法：
+//考虑到数据的输入方式及规模，
+//我们使用kruskal算法来求最小生成树，
+//将每次所加的值放置于一个数组中，
+//最后输出数组最大值即可
+
+//猜想正确
+
+//证明：
+//
+
+int par[MAX_N+1],_rank[MAX_N+1];//数组par表示的是父亲的编号 par[x]=x时，x是所在树的根
 //并查集的实现
 void Init(int n){//初始化
     rep(0,i,n){
@@ -50,6 +59,7 @@ void unite(int x,int y){//合并x和y所属的集合
         par[y]=x;
         if(_rank[x]==_rank[y]) _rank[x]++;//x的高度增加
     }
+    
 }
 
 bool same(int x,int y){//判断x和y是否属于同一集合
@@ -64,31 +74,37 @@ bool cmp(const Edge& e1,const Edge& e2){
     return e1.cost<e2.cost;
 }
 
-Edge eg[MAX_E];
-int V,E;
-
-int krsukal(){
-    sort(eg,eg+E,cmp);
-    Init(V);
-    int res=0;
-    rep(0,i,E){
+Edge eg[MAX_M+1];
+int N,M;
+int a[MAX_M+1];
+int cnt;
+void krsukal(){
+    sort(eg,eg+M,cmp);
+    Init(N);
+    rep(0,i,M){
         Edge e=eg[i];
         if(!same(e.u,e.v)){//加入之前u和v不在同一个连接分量中
             unite(e.u,e.v);//将连接顶点u和顶点v的边e加入到生成树中
-            res+=e.cost;
+            a[cnt++]=e.cost;
         }
     }
-    return res;
 }
 
 void solve(){
-
+    krsukal();
+    cout<<*max_element(a,a+cnt)<<endl;
 }
 
 int main(){
     //ios_base::sync_with_stdio(false);
     //cin.tie(NULL);
     frep;
+    cin>>N>>M;
+    int A,B,L;
+    rep(0,i,M){
+        cin>>A>>B>>L;
+        eg[i]=(Edge){A,B,L};
+    }
     solve();
     frepC;
     sys;
