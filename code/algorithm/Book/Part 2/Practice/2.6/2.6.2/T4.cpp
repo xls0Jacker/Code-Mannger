@@ -1,12 +1,7 @@
 #include"bits/stdc++.h"
-#define rep(a,i,n) for(int i=a;i<n;i++)
-#define per(a,i,n) for(int i=n;i>a;i--)
-#define Rep(a,i,n) for(int i=a;i<=n;i++)
-#define Per(a,i,n) for(int i=n;i>=a;i--)
 #define frep freopen("in.txt","r",stdin)
 #define frepC freopen("CON","r",stdin)
 #define sys system("pause")
-typedef long long ll;
 using namespace std;
 const int MAX_H=1e6+1;
 // Semi-prime H-numbers
@@ -18,62 +13,48 @@ const int MAX_H=1e6+1;
 //将所有的H_Prime放入一个新的集合中，
 //两两相乘看是否满足H_semi_prime的条件，//TLE?
 //之后累加得到答案
-int h;
-int _Prime[MAX_H+1];
-bool is_H_Number[MAX_H+1];
-int cnt;//H_Prime的数的个数
 
-ll quick_multiply(ll a,ll b){
-    ll ans=0;
-    while(b){
-        ans=ans+(b%2*a);
-        a=a<<1;
-        b>>=1;
-    }
-    return ans;
-}
+//果不其然 TLE了
 
+//优化思路：
+//用0来标记H_Number,
+//用-1标记该合数为奇数个H_Number的乘积，（非1）
+//用1标记该合数为偶数个H_Number的乘积，（非1）
+//该合数为偶数个H_Number的乘积时，该合数为H_semi_prime（非1）
+int vis[MAX_H+1];  //记录数组中的下标是否为两个H-primes组成
+int ans[MAX_H+1];  //记录数组到下标的所有数字中的H-semi-primes个数
 void prev(){
-    int sum=1;
-    while(sum<=1e6+2){//筛H_Number
-        is_H_Number[sum]=true;
-        sum+=4;
-    }
-}
-void solve(){
-    for(int i=1;i<=h;i+=4){//筛H_Prime
-        Rep(2,j,i){ 
-            if(i%j!=0) continue;
-            //if(i/j==1) continue;
-            if(is_H_Number[j] and is_H_Number[i/j]){
-                _Prime[cnt++]=i;
+    memset(vis,0,sizeof(vis));
+    //打表，在表中记录所有的H-semi-primes数字
+    for(int i=5; i<=MAX_H+1; i+=4)
+        for(int j=5; j<=MAX_H+1; j+=4){
+            int tmp=i*j;
+            if(tmp>MAX_H+1)
                 break;
-            }
+            if(vis[i]==0&&vis[j]==0)//两个非1 H_Number的乘积
+                vis[tmp]=1;
+            else
+                vis[tmp]=-1;
         }
+    //打表，在表中记录所有的H-semi-primes数字
+
+    //在ans表中记录从1到下标的范围内H-semi-primes的个数
+    int cnt=0;
+    for(int i=1; i<=MAX_H+1; ++i){
+        if(vis[i]==1)
+            cnt++;
+        ans[i]=cnt;
     }
-    int ans=0;
-    rep(0,i,cnt){//筛H_semi_prime
-        rep(i,j,cnt){
-            ll tmp=quick_multiply((ll)_Prime[i],(ll)_Prime[j]);
-            if(tmp>h or !is_H_Number[tmp]) continue;
-            ans++;
-        }
-    }
-    cout<<h<<" "<<ans<<endl;
 }
 
-int main(){
-    //ios_base::sync_with_stdio(false);
-    //cin.tie(NULL);
+int h;
+int main() {
     frep;
     prev();
     while(cin>>h and h!=0){
-        memset(_Prime,0,sizeof(_Prime));
-        cnt=0;
-        solve();
+        cout<<h<<" "<<ans[h]<<endl;
     }
     frepC;
     sys;
     return 0;
 }
-
