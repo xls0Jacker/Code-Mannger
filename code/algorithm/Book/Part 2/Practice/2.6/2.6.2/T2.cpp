@@ -11,6 +11,11 @@ using namespace std;
 const int MAX_N=1e6+5;
 //素数的个数
 //n<=1e6
+
+//思路：
+//利用埃氏筛打好一个素数表，
+//之后利用bfs从末位开搜索找到最小次数
+
 int n;
 //埃氏筛法 
 //表中剩余数字最小数字是m时，m就是一个素数，
@@ -29,18 +34,16 @@ int sieve(int n){//O(nloglogn)
     }
     return p;
 }
-int cnt;
+
 string s[MAX_N+1];
-//记录最短路径?
+int d[MAX_N+1];
+string A,B;
 void solve(){
-    sieve(10000);
+    sieve(10000);//打素数表
     //bfs搜索成立次数
-    string A,B;
-    int ans=0;
-    cin>>A>>B;
     queue<string>q;
     q.push(A);
-
+    d[stoi(A)]=0;
     while(q.size()){
         string p=q.front();q.pop();
         Per(0,i,3){//位次（先改末尾，保证不漏）
@@ -48,24 +51,28 @@ void solve(){
                 string tmp=p;
                 if(i==0 and j==0) continue;//首位为0不符合题意
                 tmp[i]=j+'0';
-                if(!(is_prime[stoi(tmp)])) continue;
-                p=tmp;
-                q.push(p);
-                ans++;
-                if(A==B){
-                    cout<<ans<<endl;
-                    return;
-                }
+                if(!(is_prime[stoi(tmp)])) continue;//非质数不符合题意
+                if(d[stoi(tmp)]>d[stoi(p)] or d[stoi(tmp)]!=0 or tmp==A) continue;//次数变大或已经走过 原点特殊处理
+                q.push(tmp);
+                d[stoi(tmp)]=d[stoi(p)]+1;
             }
         }
     }
+    cout<<d[stoi(B)]<<endl;
 }
 
 int main(){
     //ios_base::sync_with_stdio(false);
     //cin.tie(NULL);
     frep;
-    solve();
+    int T;
+    cin>>T;
+    while(T--){
+        cin>>A>>B;
+        memset(s,0,sizeof(s));
+        memset(d,0,sizeof(d));
+        solve();
+    }
     frepC;
     sys;
     return 0;

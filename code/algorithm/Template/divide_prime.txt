@@ -1,0 +1,23 @@
+int _prime[MAX_N+1];//质因数的指数
+int cnt;//不同质因数的个数
+int sum;//质因数的个数
+void divide(int n) {//分解质因数，获得其底数和指数
+    for (int i = 2; i <= n / i; i++) {
+        if (n % i == 0) {
+            int s = 0;
+            while (n % i == 0) {
+                n /= i;
+                s++;
+            }
+            //cout << i << ' ' << s << endl;   //i为底数，s为指数
+            _prime[cnt++]=s;
+            sum+=s;
+        }
+    }
+    // if (n > 1) cout << n << ' ' << 1 << endl;
+    // puts("");
+    if(n>1){
+        _prime[cnt++]=1;
+        sum+=1;
+    }
+}

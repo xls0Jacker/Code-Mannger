@@ -1,0 +1,9 @@
+ll quick_multiply(ll a,ll b){
+    ll ans=0;
+    while(b){
+        ans=(ans+(b%2*a)%mod)%mod;
+        a=(a<<1)%mod;
+        b>>=1;
+    }
+    return ans;
+}

@@ -1,0 +1,6 @@
+ll fac(int x){//计算阶乘
+    ll temp = 1;
+    for(int i = 2; i <= x; i++)
+        temp *= i;
+    return temp;
+}
