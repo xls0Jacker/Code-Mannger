@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1. arrow function （箭头函数）
+        function foo() {
+            // function baz() {
+            //     console.log(this);//此this指向对象baz
+            // }
+            const baz = () => {
+                console.log(this);//此this指向window
+            };
+            return {
+                bar:2,
+                baz,
+            };
+        };
+        const obj=foo();
+        console.log(obj.baz());
+        
+        // 2. template literal（模板字面量）
+        const str = `hello world! ${JSON.stringify(obj)}`;
+        console.log(str);
+    </script>
+</body>
+</html>

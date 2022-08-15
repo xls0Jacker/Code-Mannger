@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!--
+    1. javascript object literal vs json（两者易相互转化）
+        JSON.parse
+        JSON.stringify
+    2. oopa vs functional programing （面向对象 vs FP）
+        programming paradigm（编程范式--上面两种方式）
+        （javascript均支持以上编程范式）
+-->
+<body>
+    <script>
+        //1.object literal
+        var obj= {
+            name:"Jakcer",
+            age:114514,
+            job:"student",
+            say:function(){
+                console.log("逸一时，误一世。");
+            },
+        };
+        //2. update
+        obj.age=24;
+        //<=>obj["age"]=24;
+        //console.log(obj);
+        
+        //3. reference
+        const a = {},//原始类型的字面量相同则相等
+            b = {},
+            c = 2,
+            d = 2;
+        //console.log(a === b);
+        //console.log(c === d);
+        
+        //4. prototype
+        Object.create = function(obj) {
+            var F = function(){};
+            F.prototype = obj;
+            return new F();
+        };
+        const foo = {
+            bar:"baz",
+        };
+        const newObj = Object.create(foo);
+        //console.log(newObj);
+        for(name in newObj) {
+            console.log(name);
+        }
+        //TODO why cannot iterate Array
+        
+        for(const name of Object.getOwnPropertyNames(String)) {
+            console.log(name);
+        }
+        console.log("<--------------------------->")
+        for(const name of Object.getOwnPropertyNames(String.prototype)) {
+            console.log(name);
+        }
+        //5. delete 
+        delete obj.age;
+        console.log(obj);
+    </script>
+</body>
+</html>

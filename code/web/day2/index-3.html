@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1. function
+        //static properties of Function
+        for(const name of Object.getOwnPropertyNames(Function)) {
+            console.log(name);
+        }
+        console.log("<--------------------------->")
+        //properties ofinstance of Function
+        for(const name of Object.getOwnPropertyNames(Function.prototype)) {
+            console.log(name);
+        }
+        // 2. function literal
+        const add = function (a,b,c) {
+            return a + b + c;
+        };
+        //以下为相似写法（不能重复定义）
+        // function add(a,b,c) {
+        //     return a + b + c;
+        // }
+        // console.log(add(1,2,3));
+        
+        // 3. function invocation（调用方式）
+        // 4 种方式
+        // method invocation
+        const foo = {
+            baz:1,
+            bar:function(){
+                console.log("this:",JSON.stringify(this));
+                console.log("Hello, World!");
+            },
+        };
+        foo.bar();
+        foo.bar.apply({baz:"hi"});//apply 动态改变上下文的方法
+        // function invocation
+        function baz() {
+            console.log("Hello, World!");
+        }
+        baz();
+        // constructor invocation
+        var Quo = function (string) {
+            this.status = string;
+        };
+        Quo.prototype.get_status = function() {
+            return this.status;
+        };
+        var myQuo = new Quo("confused");
+        console.log(myQuo.get_status());
+        // apply invocation
+        const addition = function(a,b) {
+            return a + b;
+        };
+        const input = [1,2];
+        console.log(addition.apply(null,input));
+        
+        // 4. arguments
+        const bazz=function() {
+            console.log("arguments:",JSON.stringify(arguments));
+            console.log(Array.isArray(arguments));//类似Array 但非Array
+        };
+        bazz(1,2,3,4,5);
+        // 5. return （返回值）
+        // 6. exception（异常）
+        function fooo(args) {
+            try{
+                if(args.length < 2){
+                    throw new Error("too few asrguments");
+                }
+            }catch(err) {
+            } finally {
+            }
+        }
+        // 7. 类型增强
+        Array.prototype.foo = function () {
+            return this.join("<:>");
+        };
+        console.log([1,1,4,5,1,4].foo());
+        
+        // 8. 递归
+        // 遍历树 DOM API（中常见）
+        // 9. scope（作用域）
+        //（js中仅有函数作用域）
+        // 10. closure（闭包）
+        function barr() {
+            const a = 10;
+            return {//无retur则无法读取a
+                a,
+            };
+        }
+        const b = barr();
+        //console.log(b.a);
+        // 11. callback
+        //eg. 餐馆点菜
+        /*（a'代表a拿到菜）
+            a-->-----------------a'
+            b--->-----------b'
+            c---->
+        */
+        function heavilyComputation(){//假设一个运行很长时间的程序
+            let i = 0;
+            console.time("heavy");
+            while (i < 1e9+7){
+                i++;
+            }
+            console.timeEnd("heavy");
+        }
+        // heavilyComputation();
+        // function foooo(callback) {
+        //     setTimeout(function() {
+        //         heavilyComputation();
+        //         callback();
+        //     },0);
+        // }
+        // foooo(() => {
+        //     console.log("callback");//a先点菜
+        // });
+        // console.log("before callback");//a不是最先拿到的
+        
+        // 12. curry（柯里化）
+        // lambada
+        const substract = (a,b) => a - b;
+        //使被减数固定
+        const substractN = (n) => (b) => substract(n,b)
+        const substract10 = substractN(10);
+        console.log(substract10(5));
+        
+        //Ex 常见类型的方法数：
+        console.log(
+            "length of Array Prototype",
+            Object.getOwnPropertyNames(Array.prototype).length
+        );
+        console.log(
+            "length of Number Prototype",
+            Object.getOwnPropertyNames(Number.prototype).length
+        );
+        console.log(
+            "length of String Prototype",
+            Object.getOwnPropertyNames(String.prototype).length
+        );
+    </script>
+</body>
+</html>

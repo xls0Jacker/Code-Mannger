@@ -13,29 +13,35 @@
     */
     span,
     div{
-        background-color: red;
+        background-color: rgb(201, 185, 185);
     }
 
     div{
         display: inline;
     }
-    /* 伪元素 */
-    div.i-am-a-element::before{
+    /* 伪元素 （自设元素）*/
+    div.i-am-a-element::before{ 
         content: "Hello, World!";
-    }
+    }/*最前内容放置*/
     div.i-am-a-element::after{
         content: "World, Hello!";
-    }
+    }/*最后内容放置*/
+
+    /* 伪类 （元素+状态）*/
+    div.i-am-a-element:hover{
+        cursor: pointer;
+        color: greenyellow;
+    }/* hover 处于鼠标移动到上面显示 */
     </style>
 </head>
     <!--
-        1. node.js
+        1. node.js 
             npm | yan | pnmp | cnpm
         2. 编程
             数据结构+算法
             Array.filter
             lodash
-        3. box model
+        3. box model（盒模型）
             可用让所有的标签看起来一样
         4. css 语法
             选择器 选择标签
@@ -50,16 +56,15 @@
                     布局
                     文字
                     图片
+                    ...
             js
                 操作 html css
     -->
 <body>
     <span>hi</span>
     <div>hi</div>
-    <div class="i-am-a-element">
-        ::before
-        "@"
-        ::after
+    <div class="i-am-a-element"> <!-- 样例 -->
+        @
     </div>
     <script>
         const span=document.querySelector("span");

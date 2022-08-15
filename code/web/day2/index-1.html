@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 浏览器兼容性：*/
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* hero-img */
+        .hero-img {
+            width: 100%;
+            height: 300px;
+            background-image: url("https://images.unsplash.com/photo-1622819584099-e04ccb14e8a7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            text-shadow: 2px 2px 3px white;
+        }
+        /* navbar */
+        .navbar {
+            height: 3rem;
+            line-height: 3rem;
+            text-align: center;
+        }
+        .navbar__item {
+            display: inline-block;
+        }
+        .navbar__item::before {
+            content: "|";
+            margin: 0 1rem;
+        }
+        .navbar_item:first-child::before {
+            content: "";
+        }
+        .container {
+            display: flex;
+        }
+        .container > div{
+            padding: 0.5rem;
+            margin: 0 0.5rem;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+        footer {
+            margin-top: 2rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <ul class="navbar">
+            <li class="navbar__item">Home</li>
+            <li class="navbar__item">计算机科学与技术</li>
+            <li class="navbar__item">土木工程</li>
+        </ul>
+    </header>
+    <main>
+        <figure class="hero-img">
+        </figure>
+        <div class="container">
+            <div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque laudantium fugit error soluta porro! Fugiat et temporibus accusamus nihil sint aliquid quasi, repellendus aperiam nobis itaque tempore quos minima cumque similique dolores, ipsam sapiente quo quia praesentium cum ipsum saepe! Debitis minus facere sunt deleniti nihil veniam laudantium non explicabo rem exercitationem ex accusantium, id dignissimos, adipisci magnam! Ipsum corporis beatae officiis dolore iusto aliquam rerum ipsam nihil facere? Facere sint laudantium sed vitae porro saepe sit, sequi esse veritatis placeat repellendus provident adipisci, libero nobis. Ea quae, recusandae voluptate veniam dolorum repudiandae in eos dolorem, iusto quod quas rerum.</div>
+            <div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque laudantium fugit error soluta porro! Fugiat et temporibus accusamus nihil sint aliquid quasi, repellendus aperiam nobis itaque tempore quos minima cumque similique dolores, ipsam sapiente quo quia praesentium cum ipsum saepe! Debitis minus facere sunt deleniti nihil veniam laudantium non explicabo rem exercitationem ex accusantium, id dignissimos, adipisci magnam! Ipsum corporis beatae officiis dolore iusto aliquam rerum ipsam nihil facere? Facere sint laudantium sed vitae porro saepe sit, sequi esse veritatis placeat repellendus provident adipisci, libero nobis. Ea quae, recusandae voluptate veniam dolorum repudiandae in eos dolorem, iusto quod quas rerum.</div>
+            <div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque laudantium fugit error soluta porro! Fugiat et temporibus accusamus nihil sint aliquid quasi, repellendus aperiam nobis itaque tempore quos minima cumque similique dolores, ipsam sapiente quo quia praesentium cum ipsum saepe! Debitis minus facere sunt deleniti nihil veniam laudantium non explicabo rem exercitationem ex accusantium, id dignissimos, adipisci magnam! Ipsum corporis beatae officiis dolore iusto aliquam rerum ipsam nihil facere? Facere sint laudantium sed vitae porro saepe sit, sequi esse veritatis placeat repellendus provident adipisci, libero nobis. Ea quae, recusandae voluptate veniam dolorum repudiandae in eos dolorem, iusto quod quas rerum.</div>
+        </div>
+
+    </main>
+    <footer>2022 &copy;copyright 湖工大</footer>
+</body>
+</html>
