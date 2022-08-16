@@ -1,75 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Static Template</title>
-    <style>
-      * {
-        background-color: rgb(240, 241, 242);
-        font-size: 1rem;
-      }
-      div {
-        width: 400px;
-        padding: 1.5rem 1rem;
-        display: flex;
-        flex-direction: column;
-      }
-      input {
-        margin-top: 1rem;
-        border: none;
-        border-bottom: 1px solid black;
-        font-size: 0.9rem;
-      }
-      input:focus {
-        outline: none;
-      }
-      @keyframes rotate {
-        0% {
-          transform: rotate(0deg);
-        }
-        50% {
-          transform: rotate(90deg);
-        }
-        100% {
-          transform: rotate(180deg);
-          color: red;
-        }
-      }
-      span {
-        display: inline-block;
-        background-color: transparent;
-      }
-      span:hover {
-        animation: rotate 0.4s ease;
-        animation-fill-mode: both;
-        cursor: pointer;
-      }
-      em {
-        width: 50%;
-        font-size: 1rem;
-      }
-      cite {
-        margin-top: 3rem;
-        font-size: 0.5rem;
-        align-self: flex-end;
-      }
-    </style>
-  </head>
-  <body>
-    <div>
-      <em>我的待办（范例）</em>
-      <hr />
-      <!-- add todo -->
-      <input placeholder="输入待办标题 然后敲回车" />
-      <!-- todo list -->
-      <ul>
-        <li>待办事项A (<span>X</span>)</li>
-        <li>待办事项B (<span>X</span>)</li>
-        <li>待办事项C (<span>X</span>)</li>
-      </ul>
-      <cite> Fri Jun 17 2022 11:23:33 GMT+0800 (中国标准时间) </cite>
-    </div>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> NIHIAO </title>
+</head>
+<body>
+  <script>
+    "use strict";
+    let 哼=prompt('I’m JavaScript!',['请输入您的年龄']);
+  </script>
+</body>
 </html>
