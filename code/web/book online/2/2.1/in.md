@@ -11,3 +11,4 @@
         绝对路径从网站根目录开始的绝对路径，当前页面的相对路径，一个完整的 URL 地址 均可
         （好处是可以让页面提前缓存提升用户体验）
         （需要注意的是通过 src 特性添加到 HTML 文件中的代码无法进行 script 的操作）//需拆成两个标签
+# 一些总结： https://zh.javascript.info/hello-world#zong-jie

@@ -22,4 +22,4 @@
             3.变量名在能够准确描述变量的同时要足够简洁。不好的例子就是 data 和 value，这样的名称等于什么都没说。如果能够非常明显地从上下文知道数据 值所表达的含义，这样使用它们也是可以的。
             4.脑海中的术语要和团队保持一致。如果网站的访客称为“用户”，则我们采用相关的变量命名，比如 currentUser 或者 newUser，而不要使用 currentVisitor 或者一个 newManInTown。
             （重用还是新建？：额外声明一个变量绝对是利大于弊的。）
-
+# 一些总结： https://zh.javascript.info/variables#zong-jie

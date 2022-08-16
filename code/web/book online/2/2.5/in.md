@@ -37,5 +37,4 @@
                 typeof Math // "object"  (1)
                 typeof null // "object"  (2) //这个是官方已经承认的错误，为了与以往的兼容性而保留
                 typeof alert // "function"  (3)） //对函数区别对待
-# 一些总结：
-https://zh.javascript.info/types#zong-jie
+# 一些总结：https://zh.javascript.info/types#zong-jie
