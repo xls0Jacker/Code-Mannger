@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        "use strict";
+        // let n=prompt("Please enter a Number:",'');
+        // Next:for(let j=2;j<=n;j++){
+        //     for(let i=2;i<j;i++){
+        //         if(j % i == 0) continue Next;
+        //     }
+        //     alert(j);
+        // }
+        let n = 10;
+
+        nextPrime:
+        for (let i = 2; i <= n; i++) { // 对每个自然数 i
+
+            for (let j = 2; j < i; j++) { // 寻找一个除数……
+                if (i % j == 0) continue nextPrime; // 不是素数，则继续检查下一个
+            }
+
+            alert( i ); // 输出素数
+        }
+    </script>
+</body>
+</html>

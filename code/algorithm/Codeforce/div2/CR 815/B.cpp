@@ -8,18 +8,28 @@
 #define sys system("pause")
 typedef long long ll;
 using namespace std;
-
+const int MAX_N=1e5;
+int a[MAX_N+1];
+int n;
 void solve(){
-    int n;
-    //n=n ?? 100;
-	cout<<n<<endl;
+    sort(a,a+n);
+    cout<<a[n-1]+a[n-2]-a[0]-a[1]<<endl;
 }
 
 int main(){
     //ios_base::sync_with_stdio(false);
     //cin.tie(NULL);
     frep;
-    solve();
+    int t;
+    cin>>t;
+    while(t--){
+        memset(a,0,sizeof(a));
+        cin>>n;
+        rep(0,i,n){
+            cin>>a[i];
+        }
+        solve();
+    }
     frepC;
     sys;
     return 0;

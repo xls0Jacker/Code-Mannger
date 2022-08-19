@@ -10,9 +10,7 @@ typedef long long ll;
 using namespace std;
 
 void solve(){
-    int n;
-    //n=n ?? 100;
-	cout<<n<<endl;
+
 }
 
 int main(){
@@ -24,4 +22,3 @@ int main(){
     sys;
     return 0;
 }
-
