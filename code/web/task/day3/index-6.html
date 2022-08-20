@@ -1,0 +1,40 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+        // functional programing
+        // function is object
+        // function is a value
+        // value 可以 赋值给变量
+        // value 可以 作为函数返回值
+
+        const arr = [1, 2, 3, 4, 5];
+
+        // map reduce
+        const arr2 = arr.map((x) => x * x);
+
+        const arr3 = [];
+        for (let i = 0; i < arr.length; i++) {
+            arr3.push(arr[i] * arr[i]);
+        }
+
+        // lambda 主流
+        Array.prototype.map2 = function (fn) {
+            const arr = [];
+            for (let i = 0; i < this.length; i++) {
+            arr.push(fn(this[i]));
+            }
+            return arr;
+        };
+
+        const arr4 = arr.map2((x) => x * x);
+        console.log(arr4);
+        </script>
+    </body>
+    </html>

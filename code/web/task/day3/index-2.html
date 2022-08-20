@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Static Template</title>
+        <style>
+        * {
+            background-color: rgb(240, 241, 242);
+            font-size: 1rem;
+        }
+        div {
+            width: 400px;
+            padding: 1.5rem 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+        input {
+            margin-top: 1rem;
+            border: none;
+            border-bottom: 1px solid black;
+            font-size: 0.9rem;
+        }
+        input:focus {
+            outline: none;
+        }
+        @keyframes rotate {
+            0% {
+            transform: rotate(0deg);
+            }
+            50% {
+            transform: rotate(90deg);
+            }
+            100% {
+            transform: rotate(180deg);
+            color: red;
+            }
+        }
+        span {
+            display: inline-block;
+            background-color: transparent;
+        }
+        span:hover {
+            animation: rotate 0.4s ease;
+            animation-fill-mode: both;
+            cursor: pointer;
+        }
+        em {
+            width: 50%;
+            font-size: 1rem;
+        }
+        cite {
+            margin-top: 3rem;
+            font-size: 0.5rem;
+            align-self: flex-end;
+        }
+        </style>
+    </head>
+    <body>
+        <div>
+        <em>我的待办（范例）</em>
+        <hr />
+        <!-- add todo -->
+        <input id="newTodo" placeholder="输入待办标题 然后敲回车" />
+        <!-- todo list -->
+        <ul id="todos"></ul>
+        <cite> Fri Jun 17 2022 11:23:33 GMT+0800 (中国标准时间) </cite>
+        </div>
+        <script>
+        // ui = fn(state)
+
+        const input = document.getElementById("newTodo");
+        const todos = document.getElementById("todos");
+
+        // const generateTodosTemplate = (todos) =>
+        //   todos
+        //     .map(
+        //       ({ title }) => `
+        //                     <li>
+        //                       ${title} (<span>X</span>)
+        //                     </li>
+        //                   `
+        //     )
+        //     .join("");
+
+        const generateTodosTemplate = (todos) => {
+            let str = "";
+            for (let i = 0; i < todos.length; i++) {
+            let todo = todos[i];
+            str += `
+                        <li>
+                        ${todo.title} (<span>X</span>)
+                        </li>
+                    `;
+            }
+            return str;
+        };
+
+        const data = {
+            newTodo: "",
+            todos: [
+            {
+                title: "todo A",
+                completed: false,
+            },
+            {
+                title: "todo B",
+                completed: false,
+            },
+            {
+                title: "todo C",
+                completed: false,
+            },
+            ],
+        };
+
+        //  响应式 - starts
+        const bucket = new Set();
+
+        const state = new Proxy(data, {
+            // 拦截读取操作
+            get(target, key) {
+            // 将副作用函数 effect 添加到存储副作用函数的桶中
+            bucket.add(effect);
+            // 返回属性值
+            return target[key];
+            },
+            // 拦截设置操作
+            set(target, key, newVal) {
+            // 设置属性值
+            target[key] = newVal;
+            // 把副作用函数从桶里取出并执行
+            bucket.forEach((fn) => fn());
+            },
+        });
+
+        function effect() {
+            input.value = state.newTodo;
+            todos.innerHTML = generateTodosTemplate(state.todos);
+        }
+        //  响应式 - ends
+
+        console.log(state.todos);
+
+        setTimeout(() => {
+            state.newTodo = "hello there";
+        }, 1000);
+
+        input.addEventListener("input", (e) => {
+            state.newTodo = e.target.value;
+        });
+
+        document.addEventListener("keydown", function (e) {
+            if (e.code === "Enter") {
+            console.log("回车被触发");
+            const newVal = e.target.value && e.target.value.trim();
+            if (newVal) {
+                console.log("回车被有效触发");
+
+                // 这里触发了响应式
+                state.todos = [
+                ...state.todos,
+                {
+                    title: newVal,
+                    completed: false,
+                },
+                ];
+                // 这里触发了响应式
+                state.newTodo = "";
+            }
+            }
+        });
+        </script>
+    </body>
+</html>
