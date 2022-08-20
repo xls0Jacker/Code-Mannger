@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        "use strict";
+        // function pow( a,b ){//O(logb)
+        //     let ret=1;
+        //     while(b){//b在(二进制下)不为0
+        //         if(b&1) ret=ret*a;//判断最后一位是否为1，为一乘上a的？次方
+        //         b>>=1;//二进制下右移一位
+        //         a=a*a;//a随位次变化提升
+        //     }
+        //     return ret;
+        // }
+        // let x=prompt("x?",'');
+        // let n=prompt('n?','');
+        // if( n<1 ) alert(`Power ${n} is not supported, use a positive integer`);
+        // else alert( pow(x,n) );
+        function pow(x, n) {
+            let result = x;
+
+            for (let i = 1; i < n; i++) {
+                result *= x;
+            }
+
+                return result;
+            }
+
+            let x = prompt("x?", '');
+            let n = prompt("n?", '');
+
+            if (n < 1) {
+                alert(`Power ${n} is not supported, use a positive integer`);
+            } else {
+                alert( pow(x, n) );
+        }
+    </script>
+</body>
+</html>
