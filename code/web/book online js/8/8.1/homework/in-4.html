@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    "use strict";
+    // let hamster = {
+    //   stomach: [],
+
+    //   eat(food) {
+    //     this.stomach.push(food);
+    //   }
+    // };
+
+    // let speedy = {
+    //   __proto__: hamster
+    // };
+
+    // let lazy = {
+    //   __proto__: hamster
+    // };
+
+    // // 这只仓鼠找到了食物
+    // speedy.eat("apple");
+    // alert( speedy.stomach ); // apple
+
+    // 这只仓鼠也找到了食物，为什么？请修复它。
+
+    // alert( lazy.stomach ); // apple
+    let hamster = {
+      stomach: [],
+
+      eat(food) {
+        this.stomach.push(food);
+      }
+    };
+
+    let speedy = {
+      stomach: [],
+      __proto__: hamster
+    };
+
+    let lazy = {
+      stomach: [],
+      __proto__: hamster
+    };
+
+    // 这只仓鼠找到了食物
+    speedy.eat("apple");//①
+    alert( speedy.stomach ); // apple
+
+    // 这只仓鼠也找到了食物，为什么？请修复它。
+    // 在①中，speed 在其 eat 中未找到 stomach，所以顺着原型链找回去，找到了 hamster 中的 stomach 属性，
+      // 这样就改变其原型的属性，导致“另一个小鼠也吃饱了”
+    alert( lazy.stomach ); // apple
+  </script>
+</body>
+</html>
