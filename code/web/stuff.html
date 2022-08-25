@@ -19,10 +19,16 @@
 <body>
 
   <script>
-    obj={};
-    for (let key in obj) {
-      alert(obj[key]);
+    function greeting(name) {
+      alert('Hello ' + name);
     }
+
+    function processUserInput(callback) {
+      var name = prompt('Please enter your name.');
+      callback(name);
+    }
+
+    processUserInput(greeting);
   </script>
 
   <!-- the script with tests (describe, it...) -->
