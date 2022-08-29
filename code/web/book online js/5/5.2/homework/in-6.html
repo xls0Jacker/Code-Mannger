@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    "use strict"; 
+    // function random(min, max) {
+    //   return Math.round(min + Math.random() * (max - min));
+    // }
+
+    // alert( random(1, 5) );
+    // alert( random(1, 5) );
+    // alert( random(1, 5) );
+
+    // 简单但错误的解决方案
+    function randomInteger(min, max) {
+      let rand = min + Math.random() * (max - min);
+      return Math.round(rand);
+    }
+
+    alert( randomInteger(1, 3) );
+    // 获得边缘值 min 和 max 的概率比其他值低两倍。
+
+    // 正确的解决方案
+    // 1. 通过增加边界使概率相等
+    function randomInteger(min, max) {
+      // 现在范围是从  (min-0.5) 到 (max+0.5)
+      let rand = min - 0.5 + Math.random() * (max - min + 1);
+      return Math.round(rand);
+    }
+
+    alert( randomInteger(1, 3) );
+    // 2. 使用 Math.floor 来取范围从 min 到 max+1 的随机数
+    function randomInteger(min, max) {
+      // here rand is from min to (max+1)
+      let rand = min + Math.random() * (max + 1 - min);
+      return Math.floor(rand);
+    }
+
+    alert( randomInteger(1, 3) );
+  </script>
+</body>
+</html>

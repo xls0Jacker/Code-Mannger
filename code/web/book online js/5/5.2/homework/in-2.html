@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    "use strict";
+    alert( 6.35.toFixed(20) ); //6.34999999999999964473
+    // 二进制小数存储造成的精度损失
+    // 可以通过乘法化为整数后再用除法化为小数处理
+    alert( (6.35 * 10).toFixed(20) ); // 63.50000000000000000000
+    alert( Math.round(6.35 * 10) / 10); // 6.35 -> 63.5 -> 64(rounded) -> 6.4
+  </script>
+</body>
+</html>
