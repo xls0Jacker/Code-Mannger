@@ -15,7 +15,7 @@ int n;
 //埃氏筛法 
 //表中剩余数字最小数字是m时，m就是一个素数，
 //然后将表中的m倍都划去
-int prime[MAX_N];//第i个素数
+int prime[MAX_N];//第i个素数 //prime[0] = 2
 bool is_prime[MAX_N];//is_prime[i]为true时表示i为素数
 int sieve(int n){//O(nloglogn)
     int p=0;//素数的个数

@@ -8,17 +8,34 @@
 #define sys system("pause")
 typedef long long ll;
 using namespace std;
+const int MAX_N=10;
 
-void solve(){
-    int n;
-    //n=n ?? 100;
-	cout<<n<<endl;
+int n;
+vector<int> v;
+void solve() {
+  bool f=true;
+  rep(0,i,v.size()) {
+    if(!f) {
+      v.erase(v.begin()+i);
+    }
+    f=false;
+  }
+
+  rep(0,i,v.size()) {
+    cout<<v[i]<<" ";
+  }
+  cout<<endl;
 }
-
 int main(){
     //ios_base::sync_with_stdio(false);
     //cin.tie(NULL);
     frep;
+    cin>>n;
+    int tmp;
+    rep(0,i,n) {
+      cin>>tmp;
+      v.push_back(tmp);
+    }
     solve();
     frepC;
     sys;
