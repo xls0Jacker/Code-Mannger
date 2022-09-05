@@ -14,12 +14,12 @@ void solve(){
 }
 
 int main(){
-	//ios_base::sync_with_stdio(false);
-	//cin.tie(NULL);
-	frep;
-	solve();
-	frepC;
-	sys;
-	return 0;
+  //ios_base::sync_with_stdio(false);
+  //cin.tie(NULL);
+  frep;
+  solve();
+  frepC;
+  sys;
+  return 0;
 }
 
