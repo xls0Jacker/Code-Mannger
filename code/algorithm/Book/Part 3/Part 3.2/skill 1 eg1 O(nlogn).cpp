@@ -23,6 +23,8 @@ const int MAX_N = 1e5;
 // 转换一下 就是要找第一个大于等于 Sum(s) + S 的位置
 // 直接利用 lower_bound 函数即可得到
 
+// 优化思路：
+// 将图预先
 int n, S;
 int a[MAX_N];
 

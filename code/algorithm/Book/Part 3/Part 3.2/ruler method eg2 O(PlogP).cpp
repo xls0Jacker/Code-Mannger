@@ -21,6 +21,28 @@ const int MAX_P = 1e6;
 // 若删除了之后 s 所包含的知识点的数量为 0，
 // 则 页数--，再次拓展右侧区间 t
 // 不断更新最小值得到答案
+
+// 优化思路：
+//  map 查询 O(logP) 
+//  unordered_map 查询 O(1) 
+// 将 map 替换为 unordered_map 即可
+char *p1,*p2,buf[100000];
+#define nc() (p1==p2 && (p2=(p1=buf)+fread(buf,1,100000,stdin),p1==p2)?EOF:*p1++)
+int read()
+{
+  int x=0,f=1;
+  char ch=nc();
+  while(ch<48||ch>57)
+  {
+      if(ch=='-')
+          f=-1;
+      ch=nc();
+  }
+  while(ch>=48&&ch<=57)
+      x=x*10+ch-48,ch=nc();
+  return x*f;
+}
+
 int P;
 int a[MAX_P];
 void solve(){// O(PlogP)
@@ -31,7 +53,7 @@ void solve(){// O(PlogP)
   }
   int n = all.size();
   // 尺取法
-  map<int, int> count;// 计算区间中知识点的出现的次数
+  unordered_map<int, int> count;// 计算区间中知识点的出现的次数
   int res = P;
   int s = 0, t = 0, num = 0;
   for(;;) {
@@ -55,9 +77,9 @@ int main(){
   //ios_base::sync_with_stdio(false);
   //cin.tie(NULL);
   frep;
-  cin >> P;
+  P = read();
   rep(0, i, P) {
-    cin >> a[i];
+    a[i] = read();
   }
   solve();
   frepC;
