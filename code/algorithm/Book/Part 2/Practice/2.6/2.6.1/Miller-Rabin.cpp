@@ -9,6 +9,7 @@
 typedef long long ll;
 using namespace std;
 //Miller-Rabin算法 大数素性判断
+//  O (T × log N) 级别的（T为检测轮数）。
 //前提完成：快速幂
 
 //__int128编译器报错但是OJ没问题

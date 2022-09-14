@@ -3,7 +3,7 @@ using namespace std;
 #define sys system("pause")
 #define frep freopen("in.txt","r",stdin)
 #define frepC freopen("CON","r",stdin)
-const int MAX_N=1e6,MAX_M=1e6;
+const int MAX_N=1e3,MAX_M=1e3;
 //邻接矩阵//二维数组存储
 
 int S[MAX_N][MAX_M];

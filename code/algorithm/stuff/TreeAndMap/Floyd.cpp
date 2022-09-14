@@ -5,7 +5,7 @@ using namespace std;
 #define frepC freopen("CON","r",stdin)
 //Floyd //多源最短路//邻接矩阵储存
 
-const int MAX_N=1e6,MAX_M=1e6;
+const int MAX_N=1e3,MAX_M=1e3;
 //邻接矩阵//二维数组存储
 
 int S[MAX_N][MAX_M];//通常存距离

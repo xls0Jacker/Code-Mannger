@@ -7,7 +7,7 @@ using namespace std;
 const int MAX=1e3;
 struct Edge{
     int u,v;//u->v
-    //int q;//权
+    //int l;//权
 };
 vector<Edge> eg[MAX];
 //1.连接关系看具体情况

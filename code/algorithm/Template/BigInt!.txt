@@ -1,0 +1,41 @@
+求解n 的阶乘 mod  p    
+    
+    打表程序：
+
+#include<iostream>
+#include<cstdio>
+#define lon long long
+using namespace std;
+const int maxn=110;
+lon n,p,a[maxn];
+int main()
+{
+    freopen("1.out","w",stdout);lon ans=1;
+    for(lon i=0;i<=1000000007;i+=10000000)
+    {
+        for(lon j=i+1;j<=i+10000000;j++)
+        ans=(ans*j)%1000000007;
+        cout<<ans<<",";
+    }
+    return 0;
+}// 结果去末尾0 首位+1
+    
+    cin>>n>>p;
+    if(n>=p)
+    {
+        cout<<0;
+        return 0;
+    }
+    if(p==1000000007)
+    {
+        lon now=n/10000000;
+        lon ans=a[now];
+        for(lon i=now*10000000+1;i<=n;i++)
+        ans=ans*i%p;
+        cout<<ans%p;
+        return 0;
+    }
+    lon ans=1;
+    for(int i=1;i<=n;i++)
+    ans=ans*i%p;
+    cout<<ans%p
